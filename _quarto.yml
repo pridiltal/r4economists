@@ -4,13 +4,19 @@ project:
 
 
 book:
-  title: "Introduction to R for Economists"
+  title: "Getting Started with R for Economists"
   author: "Priyanga Dilini Talagala"
   date: "1/6/2025"
   chapters:
     - index.qmd
     - intro.qmd
-    - summary.qmd
+    - rbasics.qmd
+    - quarto.qmd
+    - dataload.qmd
+    - quarto.qmd
+    - datawrangling.qmd
+    - dataviz.qmd
+    - statmodelling.qmd
     - references.qmd
 
 bibliography: references.bib

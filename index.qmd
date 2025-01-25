@@ -1,9 +1,9 @@
 # Preface {.unnumbered}
 
-This is a Quarto book.
+R is a free and powerful software environment for statistical computing and data visualization. It is widely used in academia and industry for data analysis and research. As one of the top programming languages for data science, R provides a variety of tools for statistical modeling, computing, and visualization.
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+Since empirical research is essential in economics, programming skills are crucial for conducting real-world data analysis. This textbook will introduce you to R and help you develop fundamental data science skills.
 
-```{r}
-1 + 1
-```
+### **About This Book**
+
+This textbook is designed for beginners, providing a strong foundation in R for economic research. It focuses on **the tidyverse** ecosystem, a collection of R packages that provide a simple yet powerful approach to data analysis. You will learn how to use tidy tools to manage and analyze data efficiently, covering the entire lifecycle of a data science project.
