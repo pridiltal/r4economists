@@ -1,51 +1,47 @@
 # R Programming Basics
 
-- R has two main parts: data structures and functions.
+-   R has two main parts: data structures and functions.
 
-  - Data structures help store and organize data so it can be used efficiently.
-  
+    -   Data structures help store and organize data so it can be used efficiently.
+
 ```{r}
  income <- c(1000, 4000, 3400, 9700, 9800)
  income
 ```
 
-  - Functions tell R what to do.
+-   Functions tell R what to do.
+
 ```{r}
 mean(income)
 summary(income)
 ```
 
-
 ## Data structures
 
-- R’s basic data structures can be grouped by:
+-   R’s basic data structures can be grouped by:
 
-  - Their dimensions (1D, 2D, or multi-dimensional).
-  - Whether they store one type of data (homogeneous) or different types of data (heterogeneous).
+    -   Their dimensions (1D, 2D, or multi-dimensional).
+    -   Whether they store one type of data (homogeneous) or different types of data (heterogeneous).
 
+-   This gives us five common data structures in R:
 
-- This gives us five common data structures in R:
+    -   Homogeneous (same type of data): Vectors, Matrices, Arrays
+    -   Heterogeneous (different types of data): Data Frames, Lists
 
-   - Homogeneous (same type of data): Vectors, Matrices, Arrays
-   - Heterogeneous (different types of data): Data Frames, Lists
-   
-   
 ```{r   out.width = "100%", echo = FALSE, fig.align='center', fig.cap="Data Structure Types. Image Source: http://venus.ifca.unican.es/Rintro/dataStruct.html" }
 knitr::include_graphics("fig/3_dataStructures.png")
 ```
 
-- Among these, vectors and data frames are the most commonly used data structures in practical applications.
+-   Among these, vectors and data frames are the most commonly used data structures in practical applications.
 
 ### Vectors
 
 **Creating vectors**
 
-
 Syntax
 
-```r
+``` r
 vector_name <- c(element1, element2, element3)
-
 ```
 
 Example
@@ -54,7 +50,6 @@ Example
 x <- c(5, 6, 3, 1, 100)
 x
 ```
-
 
 **Combine two vectors**
 
@@ -67,7 +62,6 @@ r <- c(p, q)
 r
 
 ```
-
 
 **Vector with charactor elements**
 
@@ -85,10 +79,9 @@ result <- c(TRUE, FALSE, FALSE, TRUE, FALSE)
 result
 ```
 
-
 **Simplifying vector creation**
 
-- `rep` is a function in R that repeats the values in a vector
+-   `rep` is a function in R that repeats the values in a vector
 
 ```{r}
 id <- 1:10
@@ -107,7 +100,6 @@ p <- c(100, 1000)
 x+p
 ```
 
-
 ## Data Frames
 
 **Required R package to deal with data frames**
@@ -118,27 +110,26 @@ library(tidyverse)
 
 **Create a tibble**
 
-- A tibble is an improved version of a traditional data frame in R, designed to be more user-friendly and consistent. 
+-   A tibble is an improved version of a traditional data frame in R, designed to be more user-friendly and consistent.
 
-- It is part of the `tidyverse` package and makes it easier to view and analyze data, especially when working with large datasets.
+-   It is part of the `tidyverse` package and makes it easier to view and analyze data, especially when working with large datasets.
 
-Lets consider the following example 
+Lets consider the following example
 
-**GDP per capita (current US$) - South Asia** 
+**GDP per capita (current US\$) - South Asia**
 
 *Data Source : https://data.worldbank.org/*
 
-Country	|Most Recent Year|	Most Recent Value
---------------|--------------------|-------------------
-Afghanistan	|2023|	415.7	
-Bangladesh	|2023	|2,551.0	
-Bhutan|	2023| NA
-India	|2023	|2,480.8	
-Maldives|	2023|	12,530.4	
-Nepal	|2023	|1,377.6	
-Pakistan	|2023|	1,365.3	
-Sri Lanka|	2023|	3,828.0
-
+| Country     | Most Recent Year | Most Recent Value |
+|-------------|------------------|-------------------|
+| Afghanistan | 2023             | 415.7             |
+| Bangladesh  | 2023             | 2,551.0           |
+| Bhutan      | 2023             | NA                |
+| India       | 2023             | 2,480.8           |
+| Maldives    | 2023             | 12,530.4          |
+| Nepal       | 2023             | 1,377.6           |
+| Pakistan    | 2023             | 1,365.3           |
+| Sri Lanka   | 2023             | 3,828.0           |
 
 ```{r, comment=NA, message=FALSE}
 country <- c("Afghanistan", "Bangladesh", "Bhutan", "India", "Maldives",
@@ -150,28 +141,26 @@ final <- tibble(Country = country, Recent_Year = year, Value = value )
 final
 ```
 
-
-
 ## Functions in R
 
+-   In R, functions are blocks of code that perform specific tasks.
 
-- In R, functions are blocks of code that perform specific tasks. 
+-   They take input values (called arguments), process them, and return an output.
 
-- They take input values (called arguments), process them, and return an output.
+-   Functions help automate repetitive tasks and make code more efficient.
 
-- Functions help automate repetitive tasks and make code more efficient.
+-   There are two main types of functions in R:
 
-- There are two  main types of functions in R:
-
-    - Built-in functions – Predefined in R (e.g., mean(), sum(), rep()).
+    -   Built-in functions – Predefined in R (e.g., mean(), sum(), rep()).
 
 ```{r, comment=NA, message=FALSE}
 
 summary(final$Value)
 ```
 
-    - User-defined functions – Created by users for specific needs using function().
-
+```         
+- User-defined functions – Created by users for specific needs using function().
+```
 
 ## Subsetting
 
@@ -190,9 +179,9 @@ final$Country
 
 ## Help file for Built-in functions
 
-- To access the help file for a built-in function in R, you can use either `?` or the `help()` function.
+-   To access the help file for a built-in function in R, you can use either `?` or the `help()` function.
 
-- Running either of these commands will open the help page for the specified function.
+-   Running either of these commands will open the help page for the specified function.
 
 = For example, using `?summary` or `help(summary)` will display the help file for the summary function, which is part of the base R package.
 
@@ -204,12 +193,10 @@ final$Country
 help(summary)
 ```
 
-
 ```{r out.width = "100%", echo = FALSE,fig.align='center', fig.cap="Help Page"}
 
 knitr::include_graphics("fig/5_summaryhelp.png")
 ```
-
 
 ## Commenting
 
@@ -223,26 +210,19 @@ When you go to the help page for the `mean()` function, you'll find that by defa
 mean(final$Value, na.rm = TRUE) # Calculate the average GDP value
 ```
 
-
-
-
 ## Pipe operator (`|>`)
 
-- The pipe operator (`|>`) in the base R package helps improve the readability of your code.
+-   The pipe operator (`|>`) in the base R package helps improve the readability of your code.
 
-- It takes the output of one function and passes it directly into another function as an argument, making the steps in your data analysis more connected.
+-   It takes the output of one function and passes it directly into another function as an argument, making the steps in your data analysis more connected.
 
-- Instead of using nested function calls like `function(first_input, other_inputs)`, you can write the same command in a simpler format: `first_input |> function(other_inputs)`.
-
-
+-   Instead of using nested function calls like `function(first_input, other_inputs)`, you can write the same command in a simpler format: `first_input |> function(other_inputs)`.
 
 ```{r   out.width = "100%", echo = FALSE, fig.align='center', fig.cap="Pipe Operator"}
 knitr::include_graphics("fig/4_pipeillustration.png")
 ```
 
-
-- Therefore, using the pipe operator allows you to chain multiple operations together in a way that is easier to read and understand compared to nested function calls.
-
+-   Therefore, using the pipe operator allows you to chain multiple operations together in a way that is easier to read and understand compared to nested function calls.
 
 ```{r}
 # Nested function call
@@ -253,4 +233,3 @@ mean(final$Value, na.rm = TRUE)
 # Using pipe operator) 
 final$Value |> mean(na.rm=TRUE)
 ```
-

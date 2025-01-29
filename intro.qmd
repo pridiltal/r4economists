@@ -34,113 +34,102 @@ The RStudio interface consists of four panes: See Figure 1)
 knitr::include_graphics("fig/1_Rstudio_Layout.png")
 ```
 
-
 ### Console Pane
 
-- This is where you type and execute all your R commands.
+-   This is where you type and execute all your R commands.
 
-- You can enter R commands after the '>' prompt, and R will process and execute them.
+-   You can enter R commands after the '\>' prompt, and R will process and execute them.
 
-- This is the most essential window, as it is where R performs computations and executes your instructions.
+-   This is the most essential window, as it is where R performs computations and executes your instructions.
 
 ### Source pane
 
-- In this window, a collection of commands (scripts) can be edited and saved.
+-   In this window, a collection of commands (scripts) can be edited and saved.
 
-- If this window is not visible, you can open it via File → New File → R Script.
+-   If this window is not visible, you can open it via File → New File → R Script.
 
-- Simply typing a command in the Source pane is not enough; it must be sent to the Console before R executes it.
+-   Simply typing a command in the Source pane is not enough; it must be sent to the Console before R executes it.
 
-- To run a line from the Source pane, place your cursor on the desired line or select multiple lines to execute, then click Run or press CTRL + ENTER to send them to the Console pane.
+-   To run a line from the Source pane, place your cursor on the desired line or select multiple lines to execute, then click Run or press CTRL + ENTER to send them to the Console pane.
 
-- Make sure to save the 'Untitled1' file as a `*.R` script.
-
+-   Make sure to save the 'Untitled1' file as a `*.R` script.
 
 ### Environment pane
 
-- This window contains multiple tabs: Environment, History, Connections, Build, and Tutorial.
+-   This window contains multiple tabs: Environment, History, Connections, Build, and Tutorial.
 
 The Environment tab displays all active objects.
 
-- For data frames, clicking the grid symbol opens the full data frame in the Source pane.
+-   For data frames, clicking the grid symbol opens the full data frame in the Source pane.
 
-- The History tab shows previously typed commands.
+-   The History tab shows previously typed commands.
 
-- To send a command in the history tab to the Source pane, select it and click the "To Source" icon, or click "To Console" to execute it in the Console.
+-   To send a command in the history tab to the Source pane, select it and click the "To Source" icon, or click "To Console" to execute it in the Console.
 
 ### Output Pane
 
-- This window contains multiple tabs: Files, Plots, Packages, Help, Viewer, and Presentation.
+-   This window contains multiple tabs: Files, Plots, Packages, Help, Viewer, and Presentation.
 
-- It allows you to open files, view plots (including previous ones), install and load packages, access help functions, and display web content such as Shiny apps and Quarto-generated web pages.
-
+-   It allows you to open files, view plots (including previous ones), install and load packages, access help functions, and display web content such as Shiny apps and Quarto-generated web pages.
 
 Now you are familiar with the layout. Let's begin with R basics.
 
-
 ## Installing an R Package
 
-- The primary source for R packages is CRAN (Comprehensive R Archive Network).
+-   The primary source for R packages is CRAN (Comprehensive R Archive Network).
 
-- Packages can be installed using the `install.packages()` function in R.
+-   Packages can be installed using the `install.packages()` function in R.
 
-- To install a single package, pass its name as the first argument to `install.packages()`.
+-   To install a single package, pass its name as the first argument to `install.packages()`.
 
-- The following code installs the tidyverse package from CRAN:
-
+-   The following code installs the tidyverse package from CRAN:
 
 ```{r eval = FALSE}
 install.packages("tidyverse")
 ```
 
-- This command downloads and installs the `tidyverse` package from CRAN.
+-   This command downloads and installs the `tidyverse` package from CRAN.
 
-- Any dependencies required by the package will also be downloaded and installed.
+-   Any dependencies required by the package will also be downloaded and installed.
 
-- Installing the tidyverse package may take several minutes, but you only need to do this once. Think of it like installing a mobile app—you install it once on your smartphone and can use its features until a new version is released, at which point you may need to update it
-
+-   Installing the tidyverse package may take several minutes, but you only need to do this once. Think of it like installing a mobile app—you install it once on your smartphone and can use its features until a new version is released, at which point you may need to update it
 
 ### Alternative way to install R packages in Rstudio
 
-- An alternative way to install R packages is through the Packages tab in the Output Pane.
+-   An alternative way to install R packages is through the Packages tab in the Output Pane.
 
-- Navigate to the Packages tab in the Output Pane and click Install.
+-   Navigate to the Packages tab in the Output Pane and click Install.
 
-- Under "Install from," select "Repository (CRAN)".
+-   Under "Install from," select "Repository (CRAN)".
 
-- In the Packages field, enter the name of the package you want to install.
+-   In the Packages field, enter the name of the package you want to install.
 
-- To install multiple packages at once, separate the package names with commas.
+-   To install multiple packages at once, separate the package names with commas.
 
-- Finally, click Install.
-
+-   Finally, click Install.
 
 ```{r   out.width = "100%", echo = FALSE, fig.align='center', fig.cap="Alternative way to install R packages in Rstudio"}
 knitr::include_graphics("fig/2_install_packages.png")
 ```
 
-
 ## Loading an R Package
 
-- Installing a package does not automatically make it available for use; you must load it. It's like a mobile app—you need to open it to access its functionalities.
+-   Installing a package does not automatically make it available for use; you must load it. It's like a mobile app—you need to open it to access its functionalities.
 
-- The `library()` function is used to load installed packages into R.
+-   The `library()` function is used to load installed packages into R.
 
-- To load the tidyverse package, use:
-
+-   To load the tidyverse package, use:
 
 ```{r}
 library(tidyverse)
 ```
 
-- **Note: Do not put the package name in quotes when using library().**
+-   **Note: Do not put the package name in quotes when using library().**
 
-- Some packages display messages when loaded, while others do not.
-
+-   Some packages display messages when loaded, while others do not.
 
 ## Getting Started with R
 
 For a detailed introduction to R, refer to:
 
 [An Introduction to R: https://cran.r-project.org/doc/manuals/R-intro.pdf](https://cran.r-project.org/doc/manuals/R-intro.pdf)
-

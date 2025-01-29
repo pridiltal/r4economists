@@ -150,6 +150,36 @@
     ]
   },
   {
+    "objectID": "rprojects.html",
+    "href": "rprojects.html",
+    "title": "3  Scripts and Rstudio Projects",
+    "section": "",
+    "text": "3.1 Working with R Scripts\nWorking with R script files",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Scripts and Rstudio Projects</span>"
+    ]
+  },
+  {
+    "objectID": "rprojects.html#working-with-r-scripts",
+    "href": "rprojects.html#working-with-r-scripts",
+    "title": "3  Scripts and Rstudio Projects",
+    "section": "",
+    "text": "To open a script file, go to File -&gt; New File -&gt; R Script.\nYou can use a script file to save your code so you don’t have to re-type everything when you start a new R session.\nJust typing a command in the script file isn’t enough. It must be sent to the Console before R can execute it.\nTo run a line of code from the script, place your cursor on the line (or select multiple lines), then click Run or press CTRL + ENTER to send them to the Console.\nRemember to save your script with the *.R extension and give it a suitable name, not as ‘Untitled1’.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Scripts and Rstudio Projects</span>"
+    ]
+  },
+  {
+    "objectID": "rprojects.html#working-with-rstudio-projects",
+    "href": "rprojects.html#working-with-rstudio-projects",
+    "title": "3  Scripts and Rstudio Projects",
+    "section": "3.2 Working with RStudio Projects",
+    "text": "3.2 Working with RStudio Projects\nWhen you start working on large projects, you’ll need to manage multiple files, such as input data, script files, and figures. Being organized is very important to manage your work efficiently. This is where RStudio projects help. RStudio projects allow you to keep all the documents related to a project in one folder.\nTo create an RStudio project, go to File -&gt; New Project -&gt; New Directory -&gt; New Project, and then choose a suitable name for the folder to store your work. You also need to pick a location to save your project by setting the “Create project as subdirectory of” option. In the following example, I named my project “Test” and selected the Desktop to store it.\n\n\n\n\n\nWorking with RStudio Projects\n\n\n\n\nOnce this is done, I now have a new RStudio project called “Test” on my Desktop. This project looks like a regular folder where I can save all my work. If you open the folder, you will see a .Rproj file (R Project file). In my example, since I saved my project as “Test,” the R project file is called “Test.Rproj.” Inside this folder, you can create subfolders, like one for figures called figures, another for raw data files called data, and another for your R script files called scripts.\nLet’s say you’re done working on the project for the day. Now, close the project and quit RStudio.\nThe next day, when you come back to the project, locate the folder (in my case, it’s on the Desktop), open it, and double-click the .Rproj file. This will reopen the project, and you’ll pick up right where you left off. You’ll have access to all the files you’ve saved inside the RStudio Project.\nThe only things you can’t retrieve are the commands you typed directly into the console and any unsaved outputs, like summary statistics or figures that were not saved.\nBut script files at least allow you to save time by preventing you from retyping commands or complex code you’ve already written in previous sessions. They’re better than typing directly into the console.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Scripts and Rstudio Projects</span>"
+    ]
+  },
+  {
     "objectID": "references.html",
     "href": "references.html",
     "title": "References",

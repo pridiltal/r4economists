@@ -171,8 +171,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#working-with-r-scripts" id="toc-working-with-r-scripts" class="nav-link active" data-scroll-target="#working-with-r-scripts"><span class="header-section-number">3.1</span> Working with R Scripts</a></li>
+  <li><a href="#working-with-rstudio-projects" id="toc-working-with-rstudio-projects" class="nav-link" data-scroll-target="#working-with-rstudio-projects"><span class="header-section-number">3.2</span> Working with RStudio Projects</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -196,8 +203,49 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>So far, we’ve been using the console to run code. One problem with the R console is that once you close the project, you won’t be able to access the previous code you ran unless you save the workspace. This is where the script editor comes in.</p>
+<section id="working-with-r-scripts" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="working-with-r-scripts"><span class="header-section-number">3.1</span> Working with R Scripts</h2>
+<ul>
+<li><p>To open a script file, go to File -&gt; New File -&gt; R Script.</p></li>
+<li><p>You can use a script file to save your code so you don’t have to re-type everything when you start a new R session.</p></li>
+<li><p>Just typing a command in the script file isn’t enough. It must be sent to the Console before R can execute it.</p></li>
+<li><p>To run a line of code from the script, place your cursor on the line (or select multiple lines), then click Run or press CTRL + ENTER to send them to the Console.</p></li>
+<li><p>Remember to save your script with the *.R extension and give it a suitable name, not as ‘Untitled1’.</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/6_script.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Working with R script files</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="working-with-rstudio-projects" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="working-with-rstudio-projects"><span class="header-section-number">3.2</span> Working with RStudio Projects</h2>
+<p>When you start working on large projects, you’ll need to manage multiple files, such as input data, script files, and figures. Being organized is very important to manage your work efficiently. This is where RStudio projects help. RStudio projects allow you to keep all the documents related to a project in one folder.</p>
+<p>To create an RStudio project, go to <code>File -&gt; New Project -&gt; New Directory -&gt; New Project</code>, and then choose a suitable name for the folder to store your work. You also need to pick a location to save your project by setting the “Create project as subdirectory of” option. In the following example, I named my project “Test” and selected the Desktop to store it.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/7_Project.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Working with RStudio Projects</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Once this is done, I now have a new RStudio project called “Test” on my Desktop. This project looks like a regular folder where I can save all my work. If you open the folder, you will see a <code>.Rproj</code> file (R Project file). In my example, since I saved my project as “Test,” the R project file is called “Test.Rproj.” Inside this folder, you can create subfolders, like one for figures called <code>figures</code>, another for raw data files called <code>data</code>, and another for your R script files called <code>scripts</code>.</p>
+<p>Let’s say you’re done working on the project for the day. Now, close the project and quit RStudio.</p>
+<p>The next day, when you come back to the project, locate the folder (in my case, it’s on the Desktop), open it, and double-click the .Rproj file. This will reopen the project, and you’ll pick up right where you left off. You’ll have access to all the files you’ve saved inside the RStudio Project.</p>
+<p>The only things you can’t retrieve are the commands you typed directly into the console and any unsaved outputs, like summary statistics or figures that were not saved.</p>
+<p>But script files at least allow you to save time by preventing you from retyping commands or complex code you’ve already written in previous sessions. They’re better than typing directly into the console.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
