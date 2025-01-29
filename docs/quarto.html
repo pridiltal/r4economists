@@ -171,8 +171,26 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#dynamic-documents" id="toc-dynamic-documents" class="nav-link active" data-scroll-target="#dynamic-documents"><span class="header-section-number">4.1</span> Dynamic documents</a></li>
+  <li><a href="#dynamic-documents-with-quarto" id="toc-dynamic-documents-with-quarto" class="nav-link" data-scroll-target="#dynamic-documents-with-quarto"><span class="header-section-number">4.2</span> Dynamic Documents with Quarto</a>
+  <ul class="collapse">
+  <li><a href="#installing-quarto" id="toc-installing-quarto" class="nav-link" data-scroll-target="#installing-quarto"><span class="header-section-number">4.2.1</span> Installing Quarto</a></li>
+  <li><a href="#why-quarto" id="toc-why-quarto" class="nav-link" data-scroll-target="#why-quarto"><span class="header-section-number">4.2.2</span> Why Quarto ?</a></li>
+  </ul></li>
+  <li><a href="#getting-started-with-quarto" id="toc-getting-started-with-quarto" class="nav-link" data-scroll-target="#getting-started-with-quarto"><span class="header-section-number">4.3</span> Getting Started with Quarto</a></li>
+  <li><a href="#anatomy-of-a-quarto-document" id="toc-anatomy-of-a-quarto-document" class="nav-link" data-scroll-target="#anatomy-of-a-quarto-document"><span class="header-section-number">4.4</span> Anatomy of a Quarto document</a>
+  <ul class="collapse">
+  <li><a href="#yaml-header" id="toc-yaml-header" class="nav-link" data-scroll-target="#yaml-header"><span class="header-section-number">4.4.1</span> YAML header</a></li>
+  <li><a href="#code-chunks" id="toc-code-chunks" class="nav-link" data-scroll-target="#code-chunks"><span class="header-section-number">4.4.2</span> Code Chunks</a></li>
+  <li><a href="#markdown-text" id="toc-markdown-text" class="nav-link" data-scroll-target="#markdown-text"><span class="header-section-number">4.4.3</span> Markdown text</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -196,8 +214,145 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>As an economist, you work with complex data and statistics to give businesses useful financial advice. Clear and effective data communication is essential for this role.</p>
+<p>So far, we have learned how to perform our analysis by writing commands in a script file. The advantage of this approach is that you can save all your previous code, avoiding the need to retype it from scratch each time. However, one major drawback is that the generated outputs (such as tables and graphs) are not saved automatically—you must manually save each one.</p>
+<p>Even if you make an effort to save the output, manually copying and pasting results can sometimes lead to human errors. Additionally, you may only notice errors in the original dataset after generating the outputs. When this happens, you have to rerun the code step by step, regenerate all the outputs, and manually replace the previous results based on incorrect data. This process is time-consuming and increases the risk of mistakes.</p>
+<p>This is where reproducible reporting or dynamic documents become useful. Dynamic documents allow you to store text, code, and output (e.g., tables, graphs) all in a single file. Unlike R script files, dynamic documents make it easy to save both the code and its results together, ensuring everything is available for future use.</p>
+<section id="dynamic-documents" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="dynamic-documents"><span class="header-section-number">4.1</span> Dynamic documents</h2>
+<p>Dynamic documents are important because they:</p>
+<ul>
+<li><p>They let us add R code directly into the document, and the code runs automatically to include the results.</p></li>
+<li><p>They update analyses and visuals automatically when data changes, saving time and reducing mistakes.</p></li>
+<li><p>They help recreate results easily, making analyses more transparent and consistent.</p></li>
+<li><p>They make it simple to share analysis and results with team members, improving collaboration and communication.</p></li>
+</ul>
+</section>
+<section id="dynamic-documents-with-quarto" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="dynamic-documents-with-quarto"><span class="header-section-number">4.2</span> Dynamic Documents with Quarto</h2>
+<p>Both R Markdown and Quarto allow you to create dynamic documents. Quarto is the next generation of R Markdown, so in this book, I will focus on Quarto. For those already familiar with R Markdown, you’ll find the transition to Quarto very easy, as the syntax is very similar.</p>
+<section id="installing-quarto" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="installing-quarto"><span class="header-section-number">4.2.1</span> Installing Quarto</h3>
+<p>A stable release of Quarto is included with RStudio version 2022.07.1 and later. Upgrading to future versions of RStudio will also upgrade the bundled version of Quarto.</p>
+</section>
+<section id="why-quarto" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="why-quarto"><span class="header-section-number">4.2.2</span> Why Quarto ?</h3>
+<ul>
+<li><p>Quarto supports multiple programming languages (R, Python, Julia, and more) within the same document, allowing for a more versatile workflow.</p></li>
+<li><p>Quarto provides a wider range of output formats, including HTML, PDF, Word, and slides, all from a single document. This flexibility makes it easier to publish content in various formats without needing separate files.</p></li>
+<li><p>Quarto is designed with modern development practices in mind, making it easier to integrate with version control systems like Git.</p></li>
+<li><p>Quarto offers advanced features for customization, including the ability to create custom formats and templates, which can help in producing highly tailored outputs.</p></li>
+<li><p>Quarto is actively developed with a focus on modern data science practices, which means it benefits from ongoing improvements and a growing community.</p></li>
+</ul>
+</section>
+</section>
+<section id="getting-started-with-quarto" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="getting-started-with-quarto"><span class="header-section-number">4.3</span> Getting Started with Quarto</h2>
+<p>Let’s get started with Quarto:</p>
+<ul>
+<li>First, go to <code>File -&gt; New File -&gt; Quarto Document...</code></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/8_Quarto1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Getting Started with Quarto</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Assign a name for the document title. You can always change the title later.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/8_Quarto2.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Assign a name for the document title</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p>Choose your preferred output format. In this example, I’ve selected HTML, which is the default setting. You can switch to PDF or Word output at any time using the same source file, with just minor changes to the output type.</p></li>
+<li><p>This will open a Quarto document called “Untitled1*” with example content. First, save the document with an appropriate file name.</p></li>
+<li><p>To get a feel for Quarto, let’s render the example document and check the output.</p></li>
+<li><p>Use the Render button in the RStudio IDE to render the file and preview the output.</p></li>
+<li><p>To view the output in the Viewer Pane, click the settings button next to the Render button on the right side, and select the option “Preview in Viewer Pane”.</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/8_Quarto3.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Save the document with an appropriate file name</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p>You will see the rendered output with both the code and the results in a single document.</p></li>
+<li><p>If you go to the directory where you saved the <code>.qmd</code> file (the Quarto source file), you will also find the generated HTML output with the same name in the same directory.</p></li>
+</ul>
+</section>
+<section id="anatomy-of-a-quarto-document" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="anatomy-of-a-quarto-document"><span class="header-section-number">4.4</span> Anatomy of a Quarto document</h2>
+<p>Now that you know how to render a Quarto document, let’s get familiar with the anatomy of a Quarto document. The file contains three types of content: a YAML header, code chunks, and markdown text.</p>
+<p>In addition to that, we can view the same .qmd document in two modes of the RStudio editor: visual (on the left) and source (on the right). Open the source window so that you can easily identify the syntax..</p>
+<section id="yaml-header" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="yaml-header"><span class="header-section-number">4.4.1</span> YAML header</h3>
+<ul>
+<li><p>In Quarto, YAML (which stands for YAML Ain’t Markup Language) is used for setting up metadata and configurations for your document.</p></li>
+<li><p>It is placed at the top of the Quarto file within three dashes (—), and it allows you to specify document options such as the title, author, output format (HTML, PDF, Word), date, and more.</p></li>
+<li><p>In YAML, the basic format is <code>key: value</code>, where you assign a value to a key.</p></li>
+</ul>
+<pre><code>---
+title: "Getting Started with Quarto"
+subtitle: "Report 1"
+author: "Priyanga Talagala"
+date: "2025-01-31"
+output: html_document
+---</code></pre>
+</section>
+<section id="code-chunks" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="code-chunks"><span class="header-section-number">4.4.2</span> Code Chunks</h3>
+<ul>
+<li><p>In Quarto, code chunks are sections of the document where you can write and run code. You can think of this part as a mini console window within the Quarto document.</p></li>
+<li><p>A code chunk in Quarto is enclosed between three backticks (```) to separate it from the rest of the text.</p></li>
+<li><p>The code inside these chunks is executed when you render the document, and the output (such as tables, plots, or results) is displayed directly in the final document.</p></li>
+<li><p>These chunks can contain code written in different programming languages, such as R, Python, or Julia. In the following example, {r} indicates that we are going to run R code inside this code chunk.</p></li>
+<li><p>If you want to run Python code, you just need to replace {r} with {python} in the code chunk.</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/9_chunks.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Code Chunks. LHS : Source file, RHS: Resulted output</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="markdown-text" class="level3" data-number="4.4.3">
+<h3 data-number="4.4.3" class="anchored" data-anchor-id="markdown-text"><span class="header-section-number">4.4.3</span> Markdown text</h3>
+<ul>
+<li><p>Markdown text includes formatted text, such as section headers, paragraphs, embedded images, and more. Quarto uses Markdown syntax for writing text, which is clear when you switch to the Source tab.</p></li>
+<li><p>To define section headings, you use the # symbol. The number of # symbols determines the level of the heading: one # for an H1 heading, two ## for an H2 heading, three ### for an H3 heading, and so on.</p></li>
+<li><p>In R Markdown syntax, you can format text as follows:</p>
+<ul>
+<li><p>To make text bold, use <code>**bold**</code>.</p></li>
+<li><p>To make text italic, use <code>*italic*</code>.</p></li>
+</ul></li>
+</ul>
+<p><code>This is **bold** text and this is *italic* text.</code></p>
+<p>This is <strong>bold</strong> text and this is <em>italic</em> text.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
