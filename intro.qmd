@@ -1,3 +1,40 @@
 # Introduction to R and RStudio
 
+## Installing R and Rstudio
 
+- **Step 1:** First download R freely from the Comprehensive R Archive Network (CRAN) [https://cran.r-project.org/](https://cran.r-project.org/).
+(At the moment of writing, R 4.4.2  is the latest version. Choose the most recent one.)
+
+- **Step 2:** Then install R Studio’s IDE (stands for integrated development environment), a powerful user interface for R from [https://posit.co/download/rstudio-desktop/](https://posit.co/download/rstudio-desktop/. Get the Open Source Edition of RStudio Desktop. RStudio allows you to run R in a more user-friendly environment.
+
+   - You need to install **both** R and Rstudio to use RStudio.
+
+   - If you have a pre-existing installation of R and/or RStudio, I highly recommend that you reinstall both and get as current as possible. 
+
+- **Step 3:** Then open **Rstudio**.
+
+
+### Posit Cloud
+
+- In 2022, RStudio changed its corporate name to Posit with the aim of expanding its focus beyond R to include users of Python and Visual Studio Code.
+
+- If you don't want to download or install R and R Studio, you can use RStudio on [Posit Cloud] (https://posit.cloud/) for free.
+
+
+## RStudio layout
+
+
+The RStudio interface consists of four panes: See Figure 1)
+
+   1. **Source pane**
+   
+   2. **Console pane**: This is where you type and run all your R commands.
+   
+   3. **Environment pane**, containing the Environment, History, Connections, Build, and Tutorial tabs
+   
+   4. **Output pane**, containing the Files, Plots, Packages, Help, Viewer, and Presentation tabs
+
+
+```{r   out.width = "100%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("fig/1_Rstudio_Layout.png")
+```
