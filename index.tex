@@ -66,6 +66,46 @@
 \fi
 \makeatother
 
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
@@ -285,8 +325,7 @@ The RStudio interface consists of four panes: See Figure 1)
 \item
   \textbf{Source pane}
 \item
-  \textbf{Console pane}: This is where you type and run all your R
-  commands.
+  \textbf{Console pane}
 \item
   \textbf{Environment pane}, containing the Environment, History,
   Connections, Build, and Tutorial tabs
@@ -298,6 +337,186 @@ The RStudio interface consists of four panes: See Figure 1)
 \begin{center}
 \includegraphics[width=1\textwidth,height=\textheight]{fig/1_Rstudio_Layout.png}
 \end{center}
+
+\subsection{Console Pane}\label{console-pane}
+
+\begin{itemize}
+\item
+  This is where you type and execute all your R commands.
+\item
+  You can enter R commands after the `\textgreater{}' prompt, and R will
+  process and execute them.
+\item
+  This is the most essential window, as it is where R performs
+  computations and executes your instructions.
+\end{itemize}
+
+\subsection{Source pane}\label{source-pane}
+
+\begin{itemize}
+\item
+  In this window, a collection of commands (scripts) can be edited and
+  saved.
+\item
+  If this window is not visible, you can open it via File → New File → R
+  Script.
+\item
+  Simply typing a command in the Source pane is not enough; it must be
+  sent to the Console before R executes it.
+\item
+  To run a line from the Source pane, place your cursor on the desired
+  line or select multiple lines to execute, then click Run or press CTRL
+  + ENTER to send them to the Console pane.
+\item
+  Make sure to save the `Untitled1' file as a \texttt{*.R} script.
+\end{itemize}
+
+\subsection{Environment pane}\label{environment-pane}
+
+\begin{itemize}
+\tightlist
+\item
+  This window contains multiple tabs: Environment, History, Connections,
+  Build, and Tutorial.
+\end{itemize}
+
+The Environment tab displays all active objects.
+
+\begin{itemize}
+\item
+  For data frames, clicking the grid symbol opens the full data frame in
+  the Source pane.
+\item
+  The History tab shows previously typed commands.
+\item
+  To send a command in the history tab to the Source pane, select it and
+  click the ``To Source'' icon, or click ``To Console'' to execute it in
+  the Console.
+\end{itemize}
+
+\subsection{Output Pane}\label{output-pane}
+
+\begin{itemize}
+\item
+  This window contains multiple tabs: Files, Plots, Packages, Help,
+  Viewer, and Presentation.
+\item
+  It allows you to open files, view plots (including previous ones),
+  install and load packages, access help functions, and display web
+  content such as Shiny apps and Quarto-generated web pages.
+\end{itemize}
+
+Now you are familiar with the layout. Let's begin with R basics.
+
+\section{Installing an R Package}\label{installing-an-r-package}
+
+\begin{itemize}
+\item
+  The primary source for R packages is CRAN (Comprehensive R Archive
+  Network).
+\item
+  Packages can be installed using the \texttt{install.packages()}
+  function in R.
+\item
+  To install a single package, pass its name as the first argument to
+  \texttt{install.packages()}.
+\item
+  The following code installs the tidyverse package from CRAN:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\item
+  This command downloads and installs the \texttt{tidyverse} package
+  from CRAN.
+\item
+  Any dependencies required by the package will also be downloaded and
+  installed.
+\item
+  Installing the tidyverse package may take several minutes, but you
+  only need to do this once. Think of it like installing a mobile
+  app---you install it once on your smartphone and can use its features
+  until a new version is released, at which point you may need to update
+  it
+\end{itemize}
+
+\subsection{Alternative way to install R packages in
+Rstudio}\label{alternative-way-to-install-r-packages-in-rstudio}
+
+\begin{itemize}
+\item
+  An alternative way to install R packages is through the Packages tab
+  in the Output Pane.
+\item
+  Navigate to the Packages tab in the Output Pane and click Install.
+\item
+  Under ``Install from,'' select ``Repository (CRAN)''.
+\item
+  In the Packages field, enter the name of the package you want to
+  install.
+\item
+  To install multiple packages at once, separate the package names with
+  commas.
+\item
+  Finally, click Install.
+\end{itemize}
+
+\begin{center}
+\includegraphics[width=1\textwidth,height=\textheight]{fig/2_install_packages.png}
+\end{center}
+
+\section{Loading an R Package}\label{loading-an-r-package}
+
+\begin{itemize}
+\item
+  Installing a package does not automatically make it available for use;
+  you must load it. It's like a mobile app---you need to open it to
+  access its functionalities.
+\item
+  The \texttt{library()} function is used to load installed packages
+  into R.
+\item
+  To load the tidyverse package, use:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+-- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+v dplyr     1.1.4     v readr     2.1.5
+v forcats   1.0.0     v stringr   1.5.1
+v ggplot2   3.5.1     v tibble    3.2.1
+v lubridate 1.9.3     v tidyr     1.3.1
+v purrr     1.0.2     
+-- Conflicts ------------------------------------------ tidyverse_conflicts() --
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()
+i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{itemize}
+\item
+  \textbf{Note: Do not put the package name in quotes when using
+  library().}
+\item
+  Some packages display messages when loaded, while others do not.
+\end{itemize}
+
+\section{Getting Started with R}\label{getting-started-with-r}
+
+For a detailed introduction to R, refer to:
+
+\href{https://cran.r-project.org/doc/manuals/R-intro.pdf}{An
+Introduction to R: https://cran.r-project.org/doc/manuals/R-intro.pdf}
 
 \bookmarksetup{startatroot}
 
