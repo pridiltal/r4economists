@@ -14,7 +14,6 @@ book:
     - rprojects.qmd
     - quarto.qmd
     - dataload.qmd
-    - quarto.qmd
     - datawrangling.qmd
     - dataviz.qmd
     - statmodelling.qmd
