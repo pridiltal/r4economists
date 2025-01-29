@@ -11,6 +11,7 @@ book:
     - index.qmd
     - intro.qmd
     - rbasics.qmd
+    - rprojects.qmd
     - quarto.qmd
     - dataload.qmd
     - quarto.qmd

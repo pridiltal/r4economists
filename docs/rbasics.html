@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./quarto.html" rel="next">
+<link href="./rprojects.html" rel="next">
 <link href="./intro.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -160,38 +160,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./rprojects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Scripts and Rstudio Projects</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reproducible Reporting with Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Reproducible Reporting with Quarto</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dataload.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Import and Export</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Import and Export</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reproducible Reporting with Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Reproducible Reporting with Quarto</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./datawrangling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Wrangling</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dataviz.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Visualization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Visualization</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./statmodelling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Introduction to Statistical Modelling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction to Statistical Modelling</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -409,14 +415,58 @@ length</code></pre>
 </ul>
 <p>Lets consider the following example</p>
 <p><strong>GDP per capita (current US$) - South Asia</strong></p>
-<p><em>Source : https://data.worldbank.org/</em></p>
-<p>Country |Most Recent Year| Most Recent Value<br>
-Afghanistan |2023| 415.7<br>
-Bangladesh |2023 |2,551.0<br>
-Bhutan| 2023| NA India |2023 |2,480.8<br>
-Maldives| 2023| 12,530.4<br>
-Nepal |2023 |1,377.6<br>
-Pakistan |2023| 1,365.3 Sri Lanka| 2023| 3,828.0</p>
+<p><em>Data Source : https://data.worldbank.org/</em></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Country</th>
+<th>Most Recent Year</th>
+<th>Most Recent Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Afghanistan</td>
+<td>2023</td>
+<td>415.7</td>
+</tr>
+<tr class="even">
+<td>Bangladesh</td>
+<td>2023</td>
+<td>2,551.0</td>
+</tr>
+<tr class="odd">
+<td>Bhutan</td>
+<td>2023</td>
+<td>NA</td>
+</tr>
+<tr class="even">
+<td>India</td>
+<td>2023</td>
+<td>2,480.8</td>
+</tr>
+<tr class="odd">
+<td>Maldives</td>
+<td>2023</td>
+<td>12,530.4</td>
+</tr>
+<tr class="even">
+<td>Nepal</td>
+<td>2023</td>
+<td>1,377.6</td>
+</tr>
+<tr class="odd">
+<td>Pakistan</td>
+<td>2023</td>
+<td>1,365.3</td>
+</tr>
+<tr class="even">
+<td>Sri Lanka</td>
+<td>2023</td>
+<td>3,828.0</td>
+</tr>
+</tbody>
+</table>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>country <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Afghanistan"</span>, <span class="st">"Bangladesh"</span>, <span class="st">"Bhutan"</span>, <span class="st">"India"</span>, <span class="st">"Maldives"</span>,</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Nepal"</span>, <span class="st">"Pakistan"</span>, <span class="st">"Sri Lanka"</span>)</span>
@@ -1021,8 +1071,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./quarto.html" class="pagination-link" aria-label="Reproducible Reporting with Quarto">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reproducible Reporting with Quarto</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./rprojects.html" class="pagination-link" aria-label="Scripts and Rstudio Projects">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Scripts and Rstudio Projects</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
