@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.1.29)  29 JAN 2025 14:52
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.1.29)  29 JAN 2025 18:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -901,19 +901,19 @@ File: fig/1_Rstudio_Layout.png Graphic file (type bmp)
 File: fig/2_install_packages.png Graphic file (type bmp)
 <fig/2_install_packages.png>
 
-Overfull \hbox (13.13986pt too wide) in paragraph at lines 504--504
+
+[7]
+Overfull \hbox (13.13986pt too wide) in paragraph at lines 516--516
 []\TU/lmtt/m/n/10.95 -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --[] 
  []
 
 
-
-[7]
-Overfull \hbox (13.13986pt too wide) in paragraph at lines 504--504
+Overfull \hbox (13.13986pt too wide) in paragraph at lines 516--516
 []\TU/lmtt/m/n/10.95 -- Conflicts ------------------------------------------ tidyverse_conflicts() --[] 
  []
 
 
-Overfull \hbox (133.86359pt too wide) in paragraph at lines 504--504
+Overfull \hbox (133.86359pt too wide) in paragraph at lines 516--516
 []\TU/lmtt/m/n/10.95 i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors[] 
  []
 
@@ -921,45 +921,103 @@ Overfull \hbox (133.86359pt too wide) in paragraph at lines 504--504
 
 [8]
 chapter 2.
+File: fig/3_dataStructures.png Graphic file (type bmp)
+<fig/3_dataStructures.png>
+
+Overfull \hbox (34.59639pt too wide) in paragraph at lines 620--620
+[][][]|\TU/lmr/m/n/10.95 Data Structure Types. Image Source: http://venus.ifca.unican.es/Rintro/dataStruct.html| 
+ []
+
 
 
 [9
 
 ]
+
+[10]
+
+[11]
+Overfull \hbox (13.13986pt too wide) in paragraph at lines 800--800
+[]\TU/lmtt/m/n/10.95 -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --[] 
+ []
+
+
+Overfull \hbox (13.13986pt too wide) in paragraph at lines 800--800
+[]\TU/lmtt/m/n/10.95 -- Conflicts ------------------------------------------ tidyverse_conflicts() --[] 
+ []
+
+
+Overfull \hbox (133.86359pt too wide) in paragraph at lines 800--800
+[]\TU/lmtt/m/n/10.95 i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors[] 
+ []
+
+
+
+[12]
+
+[13]
+Overfull \hbox (13.13986pt too wide) in paragraph at lines 887--887
+[]\TU/lmtt/m/n/10.95 - User-defined functions – Created by users for specific needs using function().[] 
+ []
+
+
+
+[14]
+File: fig/5_summaryhelp.png Graphic file (type bmp)
+<fig/5_summaryhelp.png>
+
+
+[15]
+
+[16]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <14.4> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1034.
+
+Overfull \hbox (30.45735pt too wide) in paragraph at lines 1045--1049
+\TU/lmr/m/n/10.95 can write the same command in a simpler format: \TU/lmtt/m/n/10.95 first_input |> function(other_inputs)\TU/lmr/m/n/10.95 . 
+ []
+
+File: fig/4_pipeillustration.png Graphic file (type bmp)
+<fig/4_pipeillustration.png>
+
+
+[17]
+
+[18]
 chapter 3.
 
 
-[10
+[19
 
 ]
 chapter 4.
 
 
-[11
+[20
 
 ]
 chapter 5.
 
 
-[12
+[21
 
 ]
 chapter 6.
 
 
-[13
+[22
 
 ]
 chapter 7.
 
 
-[14
+[23
 
 ]
 chapter 8.
 
 
-[15
+[24
 
 ]
 
@@ -969,15 +1027,15 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.561 \end{CSLReferences}
-                          
+l.1127 \end{CSLReferences}
+                           
 Here is how much of TeX's memory you used:
- 22208 strings out of 475851
- 429108 string characters out of 5773637
+ 22260 strings out of 475851
+ 430281 string characters out of 5773637
  1119308 words of memory out of 5000000
- 44883 multiletter control sequences out of 15000+600000
- 565260 words of font info for 85 fonts, out of 8000000 for 9000
+ 44928 multiletter control sequences out of 15000+600000
+ 565276 words of font info for 87 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  108i,7n,123p,10900b,494s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on index.pdf (15 pages).
+Output written on index.pdf (24 pages).

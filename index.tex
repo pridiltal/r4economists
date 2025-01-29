@@ -334,9 +334,15 @@ The RStudio interface consists of four panes: See Figure 1)
   Viewer, and Presentation tabs
 \end{enumerate}
 
-\begin{center}
-\includegraphics[width=1\textwidth,height=\textheight]{fig/1_Rstudio_Layout.png}
-\end{center}
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1\textwidth,height=\textheight]{fig/1_Rstudio_Layout.png}
+
+}
+
+\caption{RStudio layout}
+
+\end{figure}%
 
 \subsection{Console Pane}\label{console-pane}
 
@@ -466,9 +472,15 @@ Rstudio}\label{alternative-way-to-install-r-packages-in-rstudio}
   Finally, click Install.
 \end{itemize}
 
-\begin{center}
-\includegraphics[width=1\textwidth,height=\textheight]{fig/2_install_packages.png}
-\end{center}
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1\textwidth,height=\textheight]{fig/2_install_packages.png}
+
+}
+
+\caption{Alternative way to install R packages in Rstudio}
+
+\end{figure}%
 
 \section{Loading an R Package}\label{loading-an-r-package}
 
@@ -521,6 +533,560 @@ Introduction to R: https://cran.r-project.org/doc/manuals/R-intro.pdf}
 \bookmarksetup{startatroot}
 
 \chapter{R Programming Basics}\label{r-programming-basics}
+
+\begin{itemize}
+\item
+  R has two main parts: data structures and functions.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Data structures help store and organize data so it can be used
+    efficiently.
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ income }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1000}\NormalTok{, }\DecValTok{4000}\NormalTok{, }\DecValTok{3400}\NormalTok{, }\DecValTok{9700}\NormalTok{, }\DecValTok{9800}\NormalTok{)}
+\NormalTok{ income}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1000 4000 3400 9700 9800
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Functions tell R what to do.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(income)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 5580
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(income)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   1000    3400    4000    5580    9700    9800 
+\end{verbatim}
+
+\section{Data structures}\label{data-structures}
+
+\begin{itemize}
+\item
+  R's basic data structures can be grouped by:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Their dimensions (1D, 2D, or multi-dimensional).
+  \item
+    Whether they store one type of data (homogeneous) or different types
+    of data (heterogeneous).
+  \end{itemize}
+\item
+  This gives us five common data structures in R:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Homogeneous (same type of data): Vectors, Matrices, Arrays
+  \item
+    Heterogeneous (different types of data): Data Frames, Lists
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1\textwidth,height=\textheight]{fig/3_dataStructures.png}
+
+}
+
+\caption{Data Structure Types. Image Source:
+http://venus.ifca.unican.es/Rintro/dataStruct.html}
+
+\end{figure}%
+
+\begin{itemize}
+\tightlist
+\item
+  Among these, vectors and data frames are the most commonly used data
+  structures in practical applications.
+\end{itemize}
+
+\subsection{Vectors}\label{vectors}
+
+\textbf{Creating vectors}
+
+Syntax
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vector\_name }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(element1, element2, element3)}
+\end{Highlighting}
+\end{Shaded}
+
+Example
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{100}\NormalTok{)}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1]   5   6   3   1 100
+\end{verbatim}
+
+\textbf{Combine two vectors}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{)}
+\NormalTok{p}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1 2 3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{q }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{30}\NormalTok{)}
+\NormalTok{q}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 10 20 30
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{r }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(p, q)}
+\NormalTok{r}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1]  1  2  3 10 20 30
+\end{verbatim}
+
+\textbf{Vector with charactor elements}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{countries }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Sri Lanka"}\NormalTok{, }\StringTok{"Afghanistan"}\NormalTok{, }\StringTok{"Bangladesh"}\NormalTok{, }\StringTok{"Bhutan"}\NormalTok{, }\StringTok{"India"}\NormalTok{, }\StringTok{"Iran"}\NormalTok{, }\StringTok{"Maldives"}\NormalTok{, }\StringTok{"Nepal"}\NormalTok{, }\StringTok{"Pakistan"}\NormalTok{)}
+
+\NormalTok{countries}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "Sri Lanka"   "Afghanistan" "Bangladesh"  "Bhutan"      "India"      
+[6] "Iran"        "Maldives"    "Nepal"       "Pakistan"   
+\end{verbatim}
+
+\textbf{Logical vector}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{result }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{result}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1]  TRUE FALSE FALSE  TRUE FALSE
+\end{verbatim}
+
+\textbf{Simplifying vector creation}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{rep} is a function in R that repeats the values in a vector
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{id }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}
+\NormalTok{id}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ [1]  1  2  3  4  5  6  7  8  9 10
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{treatment }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{, }\AttributeTok{each=}\DecValTok{2}\NormalTok{)}
+\NormalTok{treatment}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1 1 2 2 3 3
+\end{verbatim}
+
+\textbf{Vector operations}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{)}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{30}\NormalTok{)}
+\NormalTok{x}\SpecialCharTok{+}\NormalTok{y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 11 22 33
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{1000}\NormalTok{)}
+\NormalTok{x}\SpecialCharTok{+}\NormalTok{p}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Warning in x + p: longer object length is not a multiple of shorter object
+length
+\end{verbatim}
+
+\begin{verbatim}
+[1]  101 1002  103
+\end{verbatim}
+
+\section{Data Frames}\label{data-frames}
+
+\textbf{Required R package to deal with data frames}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+-- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+v dplyr     1.1.4     v readr     2.1.5
+v forcats   1.0.0     v stringr   1.5.1
+v ggplot2   3.5.1     v tibble    3.2.1
+v lubridate 1.9.3     v tidyr     1.3.1
+v purrr     1.0.2     
+-- Conflicts ------------------------------------------ tidyverse_conflicts() --
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()
+i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\textbf{Create a tibble}
+
+\begin{itemize}
+\item
+  A tibble is an improved version of a traditional data frame in R,
+  designed to be more user-friendly and consistent.
+\item
+  It is part of the \texttt{tidyverse} package and makes it easier to
+  view and analyze data, especially when working with large datasets.
+\end{itemize}
+
+Lets consider the following example
+
+\textbf{GDP per capita (current US\$) - South Asia}
+
+\emph{Source : https://data.worldbank.org/}
+
+Country \textbar Most Recent Year\textbar{} Most Recent Value\\
+Afghanistan \textbar2023\textbar{} 415.7\\
+Bangladesh \textbar2023 \textbar2,551.0\\
+Bhutan\textbar{} 2023\textbar{} NA India \textbar2023 \textbar2,480.8\\
+Maldives\textbar{} 2023\textbar{} 12,530.4\\
+Nepal \textbar2023 \textbar1,377.6\\
+Pakistan \textbar2023\textbar{} 1,365.3 Sri Lanka\textbar{}
+2023\textbar{} 3,828.0
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{country }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Afghanistan"}\NormalTok{, }\StringTok{"Bangladesh"}\NormalTok{, }\StringTok{"Bhutan"}\NormalTok{, }\StringTok{"India"}\NormalTok{, }\StringTok{"Maldives"}\NormalTok{,}
+             \StringTok{"Nepal"}\NormalTok{, }\StringTok{"Pakistan"}\NormalTok{, }\StringTok{"Sri Lanka"}\NormalTok{)}
+\NormalTok{year }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\DecValTok{2023}\NormalTok{,}\DecValTok{8}\NormalTok{))}
+\NormalTok{value }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FloatTok{415.7}\NormalTok{, }\FloatTok{2551.0}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\FloatTok{2480.8}\NormalTok{, }\FloatTok{12530.4}\NormalTok{, }\FloatTok{1377.6}\NormalTok{, }\FloatTok{1365.3}\NormalTok{, }\FloatTok{3828.0}\NormalTok{)}
+
+\NormalTok{final }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{Country =}\NormalTok{ country, }\AttributeTok{Recent\_Year =}\NormalTok{ year, }\AttributeTok{Value =}\NormalTok{ value )}
+\NormalTok{final}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 8 x 3
+  Country     Recent_Year  Value
+  <chr>             <dbl>  <dbl>
+1 Afghanistan        2023   416.
+2 Bangladesh         2023  2551 
+3 Bhutan             2023    NA 
+4 India              2023  2481.
+5 Maldives           2023 12530.
+6 Nepal              2023  1378.
+7 Pakistan           2023  1365.
+8 Sri Lanka          2023  3828 
+\end{verbatim}
+
+\section{Functions in R}\label{functions-in-r}
+
+\begin{itemize}
+\item
+  In R, functions are blocks of code that perform specific tasks.
+\item
+  They take input values (called arguments), process them, and return an
+  output.
+\item
+  Functions help automate repetitive tasks and make code more efficient.
+\item
+  There are two main types of functions in R:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Built-in functions -- Predefined in R (e.g., mean(), sum(), rep()).
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(final}\SpecialCharTok{$}\NormalTok{Value)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+  415.7  1371.5  2480.8  3507.0  3189.5 12530.4       1 
+\end{verbatim}
+
+\begin{verbatim}
+- User-defined functions – Created by users for specific needs using function().
+\end{verbatim}
+
+\section{Subsetting}\label{subsetting}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{final}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 8 x 3
+  Country     Recent_Year  Value
+  <chr>             <dbl>  <dbl>
+1 Afghanistan        2023   416.
+2 Bangladesh         2023  2551 
+3 Bhutan             2023    NA 
+4 India              2023  2481.
+5 Maldives           2023 12530.
+6 Nepal              2023  1378.
+7 Pakistan           2023  1365.
+8 Sri Lanka          2023  3828 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{final[}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 1 x 1
+  Country    
+  <chr>      
+1 Afghanistan
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{final[, }\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 8 x 1
+  Country    
+  <chr>      
+1 Afghanistan
+2 Bangladesh 
+3 Bhutan     
+4 India      
+5 Maldives   
+6 Nepal      
+7 Pakistan   
+8 Sri Lanka  
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{final[}\DecValTok{1}\NormalTok{, ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 1 x 3
+  Country     Recent_Year Value
+  <chr>             <dbl> <dbl>
+1 Afghanistan        2023  416.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{final}\SpecialCharTok{$}\NormalTok{Country}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "Afghanistan" "Bangladesh"  "Bhutan"      "India"       "Maldives"   
+[6] "Nepal"       "Pakistan"    "Sri Lanka"  
+\end{verbatim}
+
+\section{Help file for Built-in
+functions}\label{help-file-for-built-in-functions}
+
+\begin{itemize}
+\item
+  To access the help file for a built-in function in R, you can use
+  either \texttt{?} or the \texttt{help()} function.
+\item
+  Running either of these commands will open the help page for the
+  specified function.
+\end{itemize}
+
+= For example, using \texttt{?summary} or \texttt{help(summary)} will
+display the help file for the summary function, which is part of the
+base R package.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{?summary}
+
+\CommentTok{\# or }
+
+\FunctionTok{help}\NormalTok{(summary)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1\textwidth,height=\textheight]{fig/5_summaryhelp.png}
+
+}
+
+\caption{Help Page}
+
+\end{figure}%
+
+\section{Commenting}\label{commenting}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(final}\SpecialCharTok{$}\NormalTok{Value) }\CommentTok{\# Calculate the average GDP value}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] NA
+\end{verbatim}
+
+When you go to the help page for the \texttt{mean()} function, you'll
+find that by default, the \texttt{na.rm} argument is set to
+\texttt{FALSE}. This means that if the data contains missing values
+(NA), they will be included in the calculation, and the result will also
+be NA. To calculate the mean while ignoring missing values, you should
+set \texttt{na.rm\ =\ TRUE}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(final}\SpecialCharTok{$}\NormalTok{Value, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\CommentTok{\# Calculate the average GDP value}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 3506.971
+\end{verbatim}
+
+\section{\texorpdfstring{Pipe operator
+(\texttt{\textbar{}\textgreater{}})}{Pipe operator (\textbar\textgreater)}}\label{pipe-operator}
+
+\begin{itemize}
+\item
+  The pipe operator (\texttt{\textbar{}\textgreater{}}) in the base R
+  package helps improve the readability of your code.
+\item
+  It takes the output of one function and passes it directly into
+  another function as an argument, making the steps in your data
+  analysis more connected.
+\item
+  Instead of using nested function calls like
+  \texttt{function(first\_input,\ other\_inputs)}, you can write the
+  same command in a simpler format:
+  \texttt{first\_input\ \textbar{}\textgreater{}\ function(other\_inputs)}.
+\end{itemize}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1\textwidth,height=\textheight]{fig/4_pipeillustration.png}
+
+}
+
+\caption{Pipe Operator}
+
+\end{figure}%
+
+\begin{itemize}
+\tightlist
+\item
+  Therefore, using the pipe operator allows you to chain multiple
+  operations together in a way that is easier to read and understand
+  compared to nested function calls.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Nested function call}
+\FunctionTok{mean}\NormalTok{(final}\SpecialCharTok{$}\NormalTok{Value, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 3506.971
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Using pipe operator) }
+\NormalTok{final}\SpecialCharTok{$}\NormalTok{Value }\SpecialCharTok{|\textgreater{}} \FunctionTok{mean}\NormalTok{(}\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 3506.971
+\end{verbatim}
 
 \bookmarksetup{startatroot}
 

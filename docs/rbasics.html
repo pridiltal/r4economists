@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -171,8 +205,23 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#data-structures" id="toc-data-structures" class="nav-link active" data-scroll-target="#data-structures"><span class="header-section-number">2.1</span> Data structures</a>
+  <ul class="collapse">
+  <li><a href="#vectors" id="toc-vectors" class="nav-link" data-scroll-target="#vectors"><span class="header-section-number">2.1.1</span> Vectors</a></li>
+  </ul></li>
+  <li><a href="#data-frames" id="toc-data-frames" class="nav-link" data-scroll-target="#data-frames"><span class="header-section-number">2.2</span> Data Frames</a></li>
+  <li><a href="#functions-in-r" id="toc-functions-in-r" class="nav-link" data-scroll-target="#functions-in-r"><span class="header-section-number">2.3</span> Functions in R</a></li>
+  <li><a href="#subsetting" id="toc-subsetting" class="nav-link" data-scroll-target="#subsetting"><span class="header-section-number">2.4</span> Subsetting</a></li>
+  <li><a href="#help-file-for-built-in-functions" id="toc-help-file-for-built-in-functions" class="nav-link" data-scroll-target="#help-file-for-built-in-functions"><span class="header-section-number">2.5</span> Help file for Built-in functions</a></li>
+  <li><a href="#commenting" id="toc-commenting" class="nav-link" data-scroll-target="#commenting"><span class="header-section-number">2.6</span> Commenting</a></li>
+  <li><a href="#pipe-operator" id="toc-pipe-operator" class="nav-link" data-scroll-target="#pipe-operator"><span class="header-section-number">2.7</span> Pipe operator (<code>|&gt;</code>)</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -196,8 +245,353 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<ul>
+<li><p>R has two main parts: data structures and functions.</p>
+<ul>
+<li>Data structures help store and organize data so it can be used efficiently.</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> income <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1000</span>, <span class="dv">4000</span>, <span class="dv">3400</span>, <span class="dv">9700</span>, <span class="dv">9800</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> income</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1000 4000 3400 9700 9800</code></pre>
+</div>
+</div>
+<ul>
+<li>Functions tell R what to do.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(income)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5580</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(income)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   1000    3400    4000    5580    9700    9800 </code></pre>
+</div>
+</div>
+<section id="data-structures" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="data-structures"><span class="header-section-number">2.1</span> Data structures</h2>
+<ul>
+<li><p>R’s basic data structures can be grouped by:</p>
+<ul>
+<li>Their dimensions (1D, 2D, or multi-dimensional).</li>
+<li>Whether they store one type of data (homogeneous) or different types of data (heterogeneous).</li>
+</ul></li>
+<li><p>This gives us five common data structures in R:</p>
+<ul>
+<li>Homogeneous (same type of data): Vectors, Matrices, Arrays</li>
+<li>Heterogeneous (different types of data): Data Frames, Lists</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/3_dataStructures.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Data Structure Types. Image Source: http://venus.ifca.unican.es/Rintro/dataStruct.html</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Among these, vectors and data frames are the most commonly used data structures in practical applications.</li>
+</ul>
+<section id="vectors" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="vectors"><span class="header-section-number">2.1.1</span> Vectors</h3>
+<p><strong>Creating vectors</strong></p>
+<p>Syntax</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>vector_name <span class="ot">&lt;-</span> <span class="fu">c</span>(element1, element2, element3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Example</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">100</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]   5   6   3   1 100</code></pre>
+</div>
+</div>
+<p><strong>Combine two vectors</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>q <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>q</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10 20 30</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">c</span>(p, q)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  1  2  3 10 20 30</code></pre>
+</div>
+</div>
+<p><strong>Vector with charactor elements</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>countries <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Sri Lanka"</span>, <span class="st">"Afghanistan"</span>, <span class="st">"Bangladesh"</span>, <span class="st">"Bhutan"</span>, <span class="st">"India"</span>, <span class="st">"Iran"</span>, <span class="st">"Maldives"</span>, <span class="st">"Nepal"</span>, <span class="st">"Pakistan"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>countries</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Sri Lanka"   "Afghanistan" "Bangladesh"  "Bhutan"      "India"      
+[6] "Iran"        "Maldives"    "Nepal"       "Pakistan"   </code></pre>
+</div>
+</div>
+<p><strong>Logical vector</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  TRUE FALSE FALSE  TRUE FALSE</code></pre>
+</div>
+</div>
+<p><strong>Simplifying vector creation</strong></p>
+<ul>
+<li><code>rep</code> is a function in R that repeats the values in a vector</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>id <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>id</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>treatment <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">each=</span><span class="dv">2</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>treatment</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 1 2 2 3 3</code></pre>
+</div>
+</div>
+<p><strong>Vector operations</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>x<span class="sc">+</span>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11 22 33</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">1000</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>x<span class="sc">+</span>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in x + p: longer object length is not a multiple of shorter object
+length</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  101 1002  103</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="data-frames" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="data-frames"><span class="header-section-number">2.2</span> Data Frames</h2>
+<p><strong>Required R package to deal with data frames</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+</div>
+<p><strong>Create a tibble</strong></p>
+<ul>
+<li><p>A tibble is an improved version of a traditional data frame in R, designed to be more user-friendly and consistent.</p></li>
+<li><p>It is part of the <code>tidyverse</code> package and makes it easier to view and analyze data, especially when working with large datasets.</p></li>
+</ul>
+<p>Lets consider the following example</p>
+<p><strong>GDP per capita (current US$) - South Asia</strong></p>
+<p><em>Source : https://data.worldbank.org/</em></p>
+<p>Country |Most Recent Year| Most Recent Value<br>
+Afghanistan |2023| 415.7<br>
+Bangladesh |2023 |2,551.0<br>
+Bhutan| 2023| NA India |2023 |2,480.8<br>
+Maldives| 2023| 12,530.4<br>
+Nepal |2023 |1,377.6<br>
+Pakistan |2023| 1,365.3 Sri Lanka| 2023| 3,828.0</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>country <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Afghanistan"</span>, <span class="st">"Bangladesh"</span>, <span class="st">"Bhutan"</span>, <span class="st">"India"</span>, <span class="st">"Maldives"</span>,</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Nepal"</span>, <span class="st">"Pakistan"</span>, <span class="st">"Sri Lanka"</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>year <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">2023</span>,<span class="dv">8</span>))</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>value <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">415.7</span>, <span class="fl">2551.0</span>, <span class="cn">NA</span>, <span class="fl">2480.8</span>, <span class="fl">12530.4</span>, <span class="fl">1377.6</span>, <span class="fl">1365.3</span>, <span class="fl">3828.0</span>)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>final <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Country =</span> country, <span class="at">Recent_Year =</span> year, <span class="at">Value =</span> value )</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>final</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 3
+  Country     Recent_Year  Value
+  &lt;chr&gt;             &lt;dbl&gt;  &lt;dbl&gt;
+1 Afghanistan        2023   416.
+2 Bangladesh         2023  2551 
+3 Bhutan             2023    NA 
+4 India              2023  2481.
+5 Maldives           2023 12530.
+6 Nepal              2023  1378.
+7 Pakistan           2023  1365.
+8 Sri Lanka          2023  3828 </code></pre>
+</div>
+</div>
+</section>
+<section id="functions-in-r" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="functions-in-r"><span class="header-section-number">2.3</span> Functions in R</h2>
+<ul>
+<li><p>In R, functions are blocks of code that perform specific tasks.</p></li>
+<li><p>They take input values (called arguments), process them, and return an output.</p></li>
+<li><p>Functions help automate repetitive tasks and make code more efficient.</p></li>
+<li><p>There are two main types of functions in R:</p>
+<ul>
+<li>Built-in functions – Predefined in R (e.g., mean(), sum(), rep()).</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(final<span class="sc">$</span>Value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+  415.7  1371.5  2480.8  3507.0  3189.5 12530.4       1 </code></pre>
+</div>
+</div>
+<pre><code>- User-defined functions – Created by users for specific needs using function().</code></pre>
+</section>
+<section id="subsetting" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="subsetting"><span class="header-section-number">2.4</span> Subsetting</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>final</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 3
+  Country     Recent_Year  Value
+  &lt;chr&gt;             &lt;dbl&gt;  &lt;dbl&gt;
+1 Afghanistan        2023   416.
+2 Bangladesh         2023  2551 
+3 Bhutan             2023    NA 
+4 India              2023  2481.
+5 Maldives           2023 12530.
+6 Nepal              2023  1378.
+7 Pakistan           2023  1365.
+8 Sri Lanka          2023  3828 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>final[<span class="dv">1</span>, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  Country    
+  &lt;chr&gt;      
+1 Afghanistan</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>final[, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 1
+  Country    
+  &lt;chr&gt;      
+1 Afghanistan
+2 Bangladesh 
+3 Bhutan     
+4 India      
+5 Maldives   
+6 Nepal      
+7 Pakistan   
+8 Sri Lanka  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>final[<span class="dv">1</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  Country     Recent_Year Value
+  &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt;
+1 Afghanistan        2023  416.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>final<span class="sc">$</span>Country</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Afghanistan" "Bangladesh"  "Bhutan"      "India"       "Maldives"   
+[6] "Nepal"       "Pakistan"    "Sri Lanka"  </code></pre>
+</div>
+</div>
+</section>
+<section id="help-file-for-built-in-functions" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="help-file-for-built-in-functions"><span class="header-section-number">2.5</span> Help file for Built-in functions</h2>
+<ul>
+<li><p>To access the help file for a built-in function in R, you can use either <code>?</code> or the <code>help()</code> function.</p></li>
+<li><p>Running either of these commands will open the help page for the specified function.</p></li>
+</ul>
+<p>= For example, using <code>?summary</code> or <code>help(summary)</code> will display the help file for the summary function, which is part of the base R package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>?summary</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="co"># or </span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/5_summaryhelp.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Help Page</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="commenting" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="commenting"><span class="header-section-number">2.6</span> Commenting</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(final<span class="sc">$</span>Value) <span class="co"># Calculate the average GDP value</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+</div>
+<p>When you go to the help page for the <code>mean()</code> function, you’ll find that by default, the <code>na.rm</code> argument is set to <code>FALSE</code>. This means that if the data contains missing values (NA), they will be included in the calculation, and the result will also be NA. To calculate the mean while ignoring missing values, you should set <code>na.rm = TRUE</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(final<span class="sc">$</span>Value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># Calculate the average GDP value</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3506.971</code></pre>
+</div>
+</div>
+</section>
+<section id="pipe-operator" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="pipe-operator"><span class="header-section-number">2.7</span> Pipe operator (<code>|&gt;</code>)</h2>
+<ul>
+<li><p>The pipe operator (<code>|&gt;</code>) in the base R package helps improve the readability of your code.</p></li>
+<li><p>It takes the output of one function and passes it directly into another function as an argument, making the steps in your data analysis more connected.</p></li>
+<li><p>Instead of using nested function calls like <code>function(first_input, other_inputs)</code>, you can write the same command in a simpler format: <code>first_input |&gt; function(other_inputs)</code>.</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/4_pipeillustration.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Pipe Operator</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Therefore, using the pipe operator allows you to chain multiple operations together in a way that is easier to read and understand compared to nested function calls.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Nested function call</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(final<span class="sc">$</span>Value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3506.971</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using pipe operator) </span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>final<span class="sc">$</span>Value <span class="sc">|&gt;</span> <span class="fu">mean</span>(<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3506.971</code></pre>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
