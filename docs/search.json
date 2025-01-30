@@ -324,7 +324,47 @@
     "href": "dataviz.html",
     "title": "7  Data Visualization",
     "section": "",
-    "text": "WIP 🚧⏳",
+    "text": "7.1 The ggplot2 API\nThe ggplot2 package structures plots using eight key components (layers):\nThe ggplot2 API\nIn each layer, we aim to answer a specific question:\nBy layering these components, ggplot2 provides a flexible and structured approach to building effective visualizations\nNow, let’s see how to create a plot using ggplot2.\nLet’s start with the foundational layer: the data layer",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "dataviz.html#the-ggplot2-api",
+    "href": "dataviz.html#the-ggplot2-api",
+    "title": "7  Data Visualization",
+    "section": "",
+    "text": "Data – What dataset should be used for the visualization?\nMapping (Aesthetics - aes) – How should the data be mapped to visual properties? (e.g., x-axis, y-axis, color, size)*\nStatistics (stat) – Should any transformations or summaries be applied? (e.g., smoothing, binning, aggregation)\nScales – How should data values be translated into visual properties? (e.g., color gradients, axis scales)\nGeometries (geom) – What type of plot best represents the data? (e.g., points, lines, bars)\nFacets – Should the data be divided into multiple panels for better comparison?\nCoordinates (coord) – Which coordinate system should be used? (e.g., Cartesian, polar)\nTheme – How should the overall appearance of the plot be styled? (e.g., fonts, background, gridlines)",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "dataviz.html#data-layer",
+    "href": "dataviz.html#data-layer",
+    "title": "7  Data Visualization",
+    "section": "7.2 Data Layer",
+    "text": "7.2 Data Layer\nThis layer asks the question: What dataset should be used for the visualization?\nIn this example, I am going to use South Asian economic indicators from the World Bank, covering the years 1960 to 2017.\nDownload the dataset: SAeconomy.csv\nDataset Glossary (Column-wise)\nCountry: The country or region of the series.\nGDP: Gross domestic product (in $USD February 2019).\nGrowth: Annual percentage growth in GDP.\nCPI: Consumer price index (base year 2010).\nImports: Imports of goods and services (% of GDP).\nExports: Exports of goods and services (% of GDP).\nPopulation: Total population.\nFor the initial exploration, I am going to filter the economic health data specifically related to Sri Lanka and analyze the country’s economic health .\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nSAeconomy_data &lt;- read_csv(here::here(\"data\", \"SAeconomy.csv\" ))\n\nRows: 464 Columns: 9\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (2): Country, Code\ndbl (7): Year, GDP, Growth, CPI, Imports, Exports, Population\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nSLeconomy &lt;- SAeconomy_data |&gt;\n  filter(Country == \"Sri Lanka\")\n\nSLeconomy\n\n# A tibble: 58 × 9\n   Country   Code   Year         GDP Growth   CPI Imports Exports Population\n   &lt;chr&gt;     &lt;chr&gt; &lt;dbl&gt;       &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;\n 1 Sri Lanka LKA    1960 1409873950.  NA     1.49    32.9    30.0    9874481\n 2 Sri Lanka LKA    1961 1444327731.  NA     1.50    28.5    27.5   10111646\n 3 Sri Lanka LKA    1962 1434156379.   3.82  1.53    29.2    27.8   10352188\n 4 Sri Lanka LKA    1963 1240672269.   2.52  1.56    27.5    25.8   10597520\n 5 Sri Lanka LKA    1964 1309747899.   3.91  1.61    26.7    24.6   10849979\n 6 Sri Lanka LKA    1965 1698319328.   2.54  1.62    25.5    25.9   11110828\n 7 Sri Lanka LKA    1966 1751470588.   5.02  1.61    25.8    22.4   11380683\n 8 Sri Lanka LKA    1967 1859465021.   6.44  1.65    23.3    20.5   11657660\n 9 Sri Lanka LKA    1968 1801344538.   5.80  1.74    23.6    20.6   11937611\n10 Sri Lanka LKA    1969 1965546218.   7.72  1.87    24.6    18.4   12214968\n# ℹ 48 more rows\n\n\nA ggplot function call begins with the ggplot() function.\n\nggplot()\n\n\n\n\n\n\n\n\nThis call is similar to taking a blank piece of paper to draw a plot, where you set the foundation for what will be visualized. In the data layer, you have to specify what dataset you want to use for the visualization. In this case, the dataset will be the economic health data for Sri Lanka.\n\nggplot(data =  SLeconomy)\n\n\n\n\n\n\n\n\nYou’re still getting the same result because ggplot() doesn’t know how to work with the dataset until you tell it what to plot and how to map the data to the axes and visual elements.\nThis is done using the second layer, the Mapping layer.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "dataviz.html#mapping-layer",
+    "href": "dataviz.html#mapping-layer",
+    "title": "7  Data Visualization",
+    "section": "7.3 Mapping Layer",
+    "text": "7.3 Mapping Layer\nIn this layer you define how the data should be represented visually, such as which variables to map to the x-axis, y-axis, and other visual elements.\n\nggplot(data =  SLeconomy,\n       mapping = aes(x = Year,\n                     y = GDP))\n\n\n\n\n\n\n\n\nWith the Mapping layer, we define what we want to see on the graph. For example, if I want to see the trend in the GDP series over the years, I select the relevant columns and map them to the x-axis and y-axis. This will label the axes with the selected variable names. However, you still can’t see a visual representation in the plotting panel. That’s because you need to specify how to draw the plot and what kind of geometry to use to represent the data values. This is where the Geometries layer comes in.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "dataviz.html#geometries-layer",
+    "href": "dataviz.html#geometries-layer",
+    "title": "7  Data Visualization",
+    "section": "7.4 Geometries Layer",
+    "text": "7.4 Geometries Layer\nThe Geometries layer is concerned with the shape of the data. In this case, since I have a time series, I can represent the data by using a line to show how the values change over the years.\nWe connect each layer with a plus sign (+), because it essentially “adds layers” to the existing plot, building on top of what was already defined.\n\nggplot(data =  SLeconomy,\n       mapping = aes(x = Year,\n                     y = GDP)) + \n  geom_line()",
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data Visualization</span>"
     ]

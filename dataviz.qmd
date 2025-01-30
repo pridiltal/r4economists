@@ -1,3 +1,117 @@
 # Data Visualization
 
-WIP 🚧⏳
+In R, there are many ways to create visualizations, as it provides various built-in functions for generating charts and graphics. . The graphics package, which comes with R by default, includes basic functions for creating different types of plots, such as line graphs, scatter plots, histograms, and bar charts. In this approach, each type of graph has its own dedicated function.
+
+However, when there are too many plotting functions to remember, managing them becomes difficult. Every time you need a new type of graph, you have to learn a new function. This challenge is what visualization expert Leland Wilkinson aimed to address through the Grammar of Graphics.
+
+Instead of treating plots as separate, unrelated charts, the Grammar of Graphics provides a unified framework for creating visualizations using a consistent set of rules. This approach moves beyond simply naming charts (e.g., pie chart, line chart, scatter plot) and focuses on understanding their structure or anatomy. By using layered components, we can build effective visualizations in a more systematic way.
+
+The key idea behind the Grammar of Graphics is that any plot can be explained using eight layered components. This theoretical design system serves as the foundation for the ggplot2 package in R, which is an implementation of these principles.
+
+## The ggplot2 API
+
+The ggplot2 package structures plots using eight key components (layers):
+
+```{r   out.width = "50%", echo = FALSE, fig.align='center', fig.cap="The ggplot2 API"}
+knitr::include_graphics("fig/15_GGapi.png")
+```
+
+In each layer, we aim to answer a specific question:
+
+- **Data – What dataset should be used for the visualization?**
+
+- **Mapping (Aesthetics - aes) – How should the data be mapped to visual properties? (e.g., x-axis, y-axis, color, size)***
+
+- Statistics (stat) – Should any transformations or summaries be applied? (e.g., smoothing, binning, aggregation)
+
+- Scales – How should data values be translated into visual properties? (e.g., color gradients, axis scales)
+
+- **Geometries (geom) – What type of plot best represents the data? (e.g., points, lines, bars)**
+
+- Facets – Should the data be divided into multiple panels for better comparison?
+
+- Coordinates (coord) – Which coordinate system should be used? (e.g., Cartesian, polar)
+
+- Theme – How should the overall appearance of the plot be styled? (e.g., fonts, background, gridlines)
+
+
+By layering these components, ggplot2 provides a flexible and structured approach to building effective visualizations
+
+
+Now, let's see how to create a plot using ggplot2. 
+
+Let's start with the foundational layer: the data layer
+
+## Data Layer
+
+This layer asks the question: What dataset should be used for the visualization?
+
+In this example, I am going to use South Asian economic indicators from the World Bank, covering the years 1960 to 2017.
+
+[Download the dataset: SAeconomy.csv](data/SAeconomy.csv)
+
+**Dataset Glossary (Column-wise)**
+
+Country:	The country or region of the series.
+
+GDP:	Gross domestic product (in $USD February 2019).
+
+Growth:	Annual percentage growth in GDP.
+
+CPI:	Consumer price index (base year 2010).
+
+Imports:	Imports of goods and services (% of GDP).
+
+Exports:	Exports of goods and services (% of GDP).
+
+Population:	Total population.
+
+For the initial exploration, I am going to filter the economic health data specifically related to Sri Lanka and analyze the country's economic health . 
+
+```{r}
+library(tidyverse)
+SAeconomy_data <- read_csv(here::here("data", "SAeconomy.csv" ))
+
+SLeconomy <- SAeconomy_data |>
+  filter(Country == "Sri Lanka")
+
+SLeconomy
+```
+A ggplot function call begins with the `ggplot()` function.
+
+```{r}
+ggplot()
+```
+This call is similar to taking a blank piece of paper to draw a plot, where you set the foundation for what will be visualized. In the data layer, you have to specify what dataset you want to use for the visualization. In this case, the dataset will be the economic health data for Sri Lanka.
+
+
+```{r}
+ggplot(data =  SLeconomy)
+```
+You're still getting the same result because ggplot() doesn't know how to work with the dataset until you tell it what to plot and how to map the data to the axes and visual elements.
+
+This is done using the second layer, the Mapping layer.
+
+## Mapping Layer
+
+In this layer you define how the data should be represented visually, such as which variables to map to the x-axis, y-axis, and other visual elements.
+
+```{r}
+ggplot(data =  SLeconomy,
+       mapping = aes(x = Year,
+                     y = GDP))
+```
+With the Mapping layer, we define what we want to see on the graph. For example, if I want to see the trend in the GDP series over the years, I select the relevant columns and map them to the x-axis and y-axis. This will label the axes with the selected variable names. However, you still can't see a visual representation in the plotting panel. That's because you need to specify how to draw the plot and what kind of geometry to use to represent the data values. This is where the Geometries layer comes in.
+
+## Geometries Layer
+
+The Geometries layer is concerned with the shape of the data. In this case, since I have a time series, I can represent the data by using a line to show how the values change over the years.
+
+We connect each layer with a plus sign (+), because it essentially "adds layers" to the existing plot, building on top of what was already defined.
+
+```{r}
+ggplot(data =  SLeconomy,
+       mapping = aes(x = Year,
+                     y = GDP)) + 
+  geom_line()
+```

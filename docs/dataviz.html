@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -171,8 +205,17 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-ggplot2-api" id="toc-the-ggplot2-api" class="nav-link active" data-scroll-target="#the-ggplot2-api"><span class="header-section-number">7.1</span> The ggplot2 API</a></li>
+  <li><a href="#data-layer" id="toc-data-layer" class="nav-link" data-scroll-target="#data-layer"><span class="header-section-number">7.2</span> Data Layer</a></li>
+  <li><a href="#mapping-layer" id="toc-mapping-layer" class="nav-link" data-scroll-target="#mapping-layer"><span class="header-section-number">7.3</span> Mapping Layer</a></li>
+  <li><a href="#geometries-layer" id="toc-geometries-layer" class="nav-link" data-scroll-target="#geometries-layer"><span class="header-section-number">7.4</span> Geometries Layer</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -196,9 +239,160 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>WIP 🚧⏳</p>
+<p>In R, there are many ways to create visualizations, as it provides various built-in functions for generating charts and graphics. . The graphics package, which comes with R by default, includes basic functions for creating different types of plots, such as line graphs, scatter plots, histograms, and bar charts. In this approach, each type of graph has its own dedicated function.</p>
+<p>However, when there are too many plotting functions to remember, managing them becomes difficult. Every time you need a new type of graph, you have to learn a new function. This challenge is what visualization expert Leland Wilkinson aimed to address through the Grammar of Graphics.</p>
+<p>Instead of treating plots as separate, unrelated charts, the Grammar of Graphics provides a unified framework for creating visualizations using a consistent set of rules. This approach moves beyond simply naming charts (e.g., pie chart, line chart, scatter plot) and focuses on understanding their structure or anatomy. By using layered components, we can build effective visualizations in a more systematic way.</p>
+<p>The key idea behind the Grammar of Graphics is that any plot can be explained using eight layered components. This theoretical design system serves as the foundation for the ggplot2 package in R, which is an implementation of these principles.</p>
+<section id="the-ggplot2-api" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="the-ggplot2-api"><span class="header-section-number">7.1</span> The ggplot2 API</h2>
+<p>The ggplot2 package structures plots using eight key components (layers):</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/15_GGapi.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption>The ggplot2 API</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In each layer, we aim to answer a specific question:</p>
+<ul>
+<li><p><strong>Data – What dataset should be used for the visualization?</strong></p></li>
+<li><p><strong>Mapping (Aesthetics - aes) – How should the data be mapped to visual properties? (e.g., x-axis, y-axis, color, size)</strong>*</p></li>
+<li><p>Statistics (stat) – Should any transformations or summaries be applied? (e.g., smoothing, binning, aggregation)</p></li>
+<li><p>Scales – How should data values be translated into visual properties? (e.g., color gradients, axis scales)</p></li>
+<li><p><strong>Geometries (geom) – What type of plot best represents the data? (e.g., points, lines, bars)</strong></p></li>
+<li><p>Facets – Should the data be divided into multiple panels for better comparison?</p></li>
+<li><p>Coordinates (coord) – Which coordinate system should be used? (e.g., Cartesian, polar)</p></li>
+<li><p>Theme – How should the overall appearance of the plot be styled? (e.g., fonts, background, gridlines)</p></li>
+</ul>
+<p>By layering these components, ggplot2 provides a flexible and structured approach to building effective visualizations</p>
+<p>Now, let’s see how to create a plot using ggplot2.</p>
+<p>Let’s start with the foundational layer: the data layer</p>
+</section>
+<section id="data-layer" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="data-layer"><span class="header-section-number">7.2</span> Data Layer</h2>
+<p>This layer asks the question: What dataset should be used for the visualization?</p>
+<p>In this example, I am going to use South Asian economic indicators from the World Bank, covering the years 1960 to 2017.</p>
+<p><a href="data/SAeconomy.csv">Download the dataset: SAeconomy.csv</a></p>
+<p><strong>Dataset Glossary (Column-wise)</strong></p>
+<p>Country: The country or region of the series.</p>
+<p>GDP: Gross domestic product (in $USD February 2019).</p>
+<p>Growth: Annual percentage growth in GDP.</p>
+<p>CPI: Consumer price index (base year 2010).</p>
+<p>Imports: Imports of goods and services (% of GDP).</p>
+<p>Exports: Exports of goods and services (% of GDP).</p>
+<p>Population: Total population.</p>
+<p>For the initial exploration, I am going to filter the economic health data specifically related to Sri Lanka and analyze the country’s economic health .</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>SAeconomy_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"SAeconomy.csv"</span> ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 464 Columns: 9
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): Country, Code
+dbl (7): Year, GDP, Growth, CPI, Imports, Exports, Population
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>SLeconomy <span class="ot">&lt;-</span> SAeconomy_data <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Country <span class="sc">==</span> <span class="st">"Sri Lanka"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>SLeconomy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 58 × 9
+   Country   Code   Year         GDP Growth   CPI Imports Exports Population
+   &lt;chr&gt;     &lt;chr&gt; &lt;dbl&gt;       &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;
+ 1 Sri Lanka LKA    1960 1409873950.  NA     1.49    32.9    30.0    9874481
+ 2 Sri Lanka LKA    1961 1444327731.  NA     1.50    28.5    27.5   10111646
+ 3 Sri Lanka LKA    1962 1434156379.   3.82  1.53    29.2    27.8   10352188
+ 4 Sri Lanka LKA    1963 1240672269.   2.52  1.56    27.5    25.8   10597520
+ 5 Sri Lanka LKA    1964 1309747899.   3.91  1.61    26.7    24.6   10849979
+ 6 Sri Lanka LKA    1965 1698319328.   2.54  1.62    25.5    25.9   11110828
+ 7 Sri Lanka LKA    1966 1751470588.   5.02  1.61    25.8    22.4   11380683
+ 8 Sri Lanka LKA    1967 1859465021.   6.44  1.65    23.3    20.5   11657660
+ 9 Sri Lanka LKA    1968 1801344538.   5.80  1.74    23.6    20.6   11937611
+10 Sri Lanka LKA    1969 1965546218.   7.72  1.87    24.6    18.4   12214968
+# ℹ 48 more rows</code></pre>
+</div>
+</div>
+<p>A ggplot function call begins with the <code>ggplot()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dataviz_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This call is similar to taking a blank piece of paper to draw a plot, where you set the foundation for what will be visualized. In the data layer, you have to specify what dataset you want to use for the visualization. In this case, the dataset will be the economic health data for Sri Lanka.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span>  SLeconomy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dataviz_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You’re still getting the same result because ggplot() doesn’t know how to work with the dataset until you tell it what to plot and how to map the data to the axes and visual elements.</p>
+<p>This is done using the second layer, the Mapping layer.</p>
+</section>
+<section id="mapping-layer" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="mapping-layer"><span class="header-section-number">7.3</span> Mapping Layer</h2>
+<p>In this layer you define how the data should be represented visually, such as which variables to map to the x-axis, y-axis, and other visual elements.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span>  SLeconomy,</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Year,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> GDP))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dataviz_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>With the Mapping layer, we define what we want to see on the graph. For example, if I want to see the trend in the GDP series over the years, I select the relevant columns and map them to the x-axis and y-axis. This will label the axes with the selected variable names. However, you still can’t see a visual representation in the plotting panel. That’s because you need to specify how to draw the plot and what kind of geometry to use to represent the data values. This is where the Geometries layer comes in.</p>
+</section>
+<section id="geometries-layer" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="geometries-layer"><span class="header-section-number">7.4</span> Geometries Layer</h2>
+<p>The Geometries layer is concerned with the shape of the data. In this case, since I have a time series, I can represent the data by using a line to show how the values change over the years.</p>
+<p>We connect each layer with a plus sign (+), because it essentially “adds layers” to the existing plot, building on top of what was already defined.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span>  SLeconomy,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Year,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> GDP)) <span class="sc">+</span> </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dataviz_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
