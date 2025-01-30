@@ -1,3 +1,65 @@
 # Data Import and Export
 
-WIP 🚧⏳
+## Tidy Workflow
+
+As an economist, working with empirical research and data is crucial for making data-driven decisions, and data science helps transform raw data into understanding, knowledge, and insights to support this process.  A **tidy workflow** focuses on the tools needed to carry out this process effectively.
+
+```{r   out.width = "100%", echo = FALSE, fig.align='center', fig.cap="Tidy workflow, Image recreated from R for Data Science (2e) (https://r4ds.hadley.nz/intro.html)"}
+knitr::include_graphics("fig/10_tidyworkflow.png")
+```
+
+When working with data, the first step is to import it into our data science environment. Next, we tidy up the data to make it clean and usable. Then, as data scientists, our main task is to understand the data using three key tools: transformation, visualization, and modeling. Finally, we communicate our results to the right people to support decision-making.
+
+
+The `tidyverse` package is a collection of R packages that work together to make data analysis easier. When you load `tidyverse`, it also loads several useful packages, including:
+`dplyr`, `readr`, `forcats`, `stringr`, `ggplot2`, `tibble`, `lubridate`, `tidyr` and 
+`purrr` 
+
+
+```{r eval = FALSE}
+library(tidyverse)
+```
+
+
+
+Let's dive into each of these steps in the tidy workflow and explore the tools available in the R ecosystem. 
+
+## Import data
+
+When you work with data, you save your raw data in a separate file, like a CSV. You can easily load this external data into the data science environment using the `readr` package.
+
+### Read data files into a tibble
+
+```{r eval = FALSE}
+data1 <- read_csv("touristsl.csv")
+```
+
+
+If the data file is in another folder within the **current working directory**, you can use the `here` function from the `here` package.  With respect to the current working directory, the `here` function helps you define the file path starting from there.
+
+For example, if you have a file called "touristsl.csv" inside a folder called "data" in the current working directory, and you are currently in the working directory, you would need to open the data folder to access the CSV file. In the `here` function, you define the path as `here("data", "touristsl.csv")`. Each folder you want to open is listed, and they are separated by commas.
+
+```{r eval = FALSE}
+library(here)
+data <- read_csv(here("data", "touristsl.csv"))
+```
+
+
+## Export data
+
+Similarly, to save a data file, we can use the write_csv function.
+
+```{r eval=FALSE}
+weight <- c(50,44,60)
+height <- c(150,160,163)
+ds <- tibble(weight, height)
+write_csv(ds, "ds.csv")
+```
+
+If you want to save the data file in another folder within the current working directory, use the `here` function to define the file path.
+
+```{r eval=FALSE}
+library(here)
+write_csv(ds, here("data", "ds.csv"))
+```
+---
