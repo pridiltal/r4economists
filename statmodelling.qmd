@@ -1,3 +1,44 @@
 # Introduction to Statistical Modelling
 
-WIP 🚧⏳
+R provides tools for everything from simple linear regression to complex machine learning algorithms. 
+
+Below are some key resources that will help you develop expertise in statistical modeling with R.
+
+
+1. [Data Visualisation Geometries Encyclopedia: Geoms in the Grammar of Graphics: All Types of Plots](https://thiyangt.github.io/geom.encyclopedia/) by Thiyanga Talagala 
+
+   This encyclopedia is a curated collection of geom available in different R programming software packages. This book can also be considered as an “Encyclopedia of Plots”.
+
+
+2. [R for Data Science](https://r4ds.had.co.nz/) by by Hadley Wickham and Garrett Grolemund
+
+   This is a great data science book for beginners interested in learning data science with R.
+
+3. [Advanced R](https://adv-r.hadley.nz/) by Hadley Wickham
+
+   This book aimed at intermediate and advanced R users.
+
+4. [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/) by Hadley Wickham
+
+   This book gives details on the basics of ggplot2 and Grammar of Graphics that ggplot2 uses.
+
+5. [An Introduction to Statistical Learning with Applications in R](https://www.statlearning.com/) by Gareth M. James, Daniela Witten, Trevor Hastie, Robert Tibshirani
+
+   This book covers topics, ranging from basic concepts to advanced machine learning techniques.
+
+6. [Forecasting: Principles and Practice](https://otexts.com/fpp3/) by Rob J Hyndman and George Athanasopoulos
+
+
+   This textbook provides a comprehensive introduction to time series analysis and forecasting method.
+   
+   
+7. [Introduction to Econometrics with R](https://www.econometrics-with-r.org/index.html)
+by Christoph Hanck, Martin Arnold, Alexander Gerber, and Martin Schmelzer
+
+
+   This book is an empirical companion to Introduction to Econometrics by Stock and Watson (2020).
+   
+   
+8. [CRAN Task View: Econometrics](https://cran.r-project.org/web/views/Econometrics.html)
+
+   The CRAN Task View offers a comprehensive list of R packages specifically for econometrics, providing useful tools for economic data analysis and modeling

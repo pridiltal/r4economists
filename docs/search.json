@@ -410,11 +410,31 @@
     ]
   },
   {
+    "objectID": "dataviz.html#coordinates-layer",
+    "href": "dataviz.html#coordinates-layer",
+    "title": "7  Data Visualization",
+    "section": "7.9 Coordinates Layer",
+    "text": "7.9 Coordinates Layer\nCoordinates (coord) layer answer the question: Which coordinate system should be used (e.g., Cartesian, polar)? In the above example, we’ve used the Cartesian coordinate system, which is the default.\nThere are two types of coordinate systems: - Linear coordinate systems : coord_cartesian(), coord_flip(), coord_fixed()\n\nNon-linear coordinate systems: coord_map(), coord_quickmap(), coord_sf(), coord_polar(), coord_trans()",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "dataviz.html#theme-layer",
+    "href": "dataviz.html#theme-layer",
+    "title": "7  Data Visualization",
+    "section": "7.10 Theme Layer",
+    "text": "7.10 Theme Layer\nThemes layer controls all the non-data elements of the plot, such as labels, titles, background, and grid lines.\n\nggplot(SAeconomy_data) +\n  aes(x = Year, y = GDP, colour = Country) +\n  geom_line() +\n  scale_color_hue(direction = 1) +\n  labs(\n    x = \"Time\",\n    y = \"GDP Growth\",\n    title = \"Annual GDP Growth \",\n    subtitle = \"South Asian Countries\"\n  ) +\n  ggthemes::theme_base()\n\nWarning: Removed 40 rows containing missing values or values outside the scale range\n(`geom_line()`).\n\n\n\n\n\n\n\n\n\nThe code above was generated with the help of the esquisse package.\n\n\n\n\n\nesquisse package: Create visual representation\n\n\n\n\n\n\n\n\n\nesquisse package: Create visual representation",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
+  },
+  {
     "objectID": "statmodelling.html",
     "href": "statmodelling.html",
     "title": "8  Introduction to Statistical Modelling",
     "section": "",
-    "text": "WIP 🚧⏳",
+    "text": "R provides tools for everything from simple linear regression to complex machine learning algorithms.\nBelow are some key resources that will help you develop expertise in statistical modeling with R.\n\nData Visualisation Geometries Encyclopedia: Geoms in the Grammar of Graphics: All Types of Plots by Thiyanga Talagala\nThis encyclopedia is a curated collection of geom available in different R programming software packages. This book can also be considered as an “Encyclopedia of Plots”.\nR for Data Science by by Hadley Wickham and Garrett Grolemund\nThis is a great data science book for beginners interested in learning data science with R.\nAdvanced R by Hadley Wickham\nThis book aimed at intermediate and advanced R users.\nggplot2: Elegant Graphics for Data Analysis by Hadley Wickham\nThis book gives details on the basics of ggplot2 and Grammar of Graphics that ggplot2 uses.\nAn Introduction to Statistical Learning with Applications in R by Gareth M. James, Daniela Witten, Trevor Hastie, Robert Tibshirani\nThis book covers topics, ranging from basic concepts to advanced machine learning techniques.\nForecasting: Principles and Practice by Rob J Hyndman and George Athanasopoulos\nThis textbook provides a comprehensive introduction to time series analysis and forecasting method.\nIntroduction to Econometrics with R by Christoph Hanck, Martin Arnold, Alexander Gerber, and Martin Schmelzer\nThis book is an empirical companion to Introduction to Econometrics by Stock and Watson (2020).\nCRAN Task View: Econometrics\nThe CRAN Task View offers a comprehensive list of R packages specifically for econometrics, providing useful tools for economic data analysis and modeling",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Introduction to Statistical Modelling</span>"
     ]
@@ -424,7 +444,7 @@
     "href": "references.html",
     "title": "References",
     "section": "",
-    "text": "R for Data Science (2e) : https://r4ds.hadley.nz/workflow-scripts.html\nAdvanced R: https://adv-r.hadley.nz/",
+    "text": "Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). R for data science. ” O’Reilly Media, Inc.”.\nWickham, H. (2019). Advanced r. chapman and hall/CRC.",
     "crumbs": [
       "References"
     ]

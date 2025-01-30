@@ -218,6 +218,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#statistics-layer" id="toc-statistics-layer" class="nav-link" data-scroll-target="#statistics-layer"><span class="header-section-number">7.6</span> Statistics Layer</a></li>
   <li><a href="#scales-layer" id="toc-scales-layer" class="nav-link" data-scroll-target="#scales-layer"><span class="header-section-number">7.7</span> Scales Layer</a></li>
   <li><a href="#facets-layer" id="toc-facets-layer" class="nav-link" data-scroll-target="#facets-layer"><span class="header-section-number">7.8</span> Facets Layer</a></li>
+  <li><a href="#coordinates-layer" id="toc-coordinates-layer" class="nav-link" data-scroll-target="#coordinates-layer"><span class="header-section-number">7.9</span> Coordinates Layer</a></li>
+  <li><a href="#theme-layer" id="toc-theme-layer" class="nav-link" data-scroll-target="#theme-layer"><span class="header-section-number">7.10</span> Theme Layer</a></li>
   </ul>
 </nav>
     </div>
@@ -591,6 +593,63 @@ dbl (7): Year, GDP, Growth, CPI, Imports, Exports, Population
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="fig/20_facet_free2.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption><code>esquisse</code> package: Create visual representation</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="coordinates-layer" class="level2" data-number="7.9">
+<h2 data-number="7.9" class="anchored" data-anchor-id="coordinates-layer"><span class="header-section-number">7.9</span> Coordinates Layer</h2>
+<p>Coordinates (coord) layer answer the question: Which coordinate system should be used (e.g., Cartesian, polar)? In the above example, we’ve used the Cartesian coordinate system, which is the default.</p>
+<p>There are two types of coordinate systems: - Linear coordinate systems : <code>coord_cartesian()</code>, <code>coord_flip()</code>, <code>coord_fixed()</code></p>
+<ul>
+<li>Non-linear coordinate systems: <code>coord_map()</code>, <code>coord_quickmap()</code>, <code>coord_sf()</code>, <code>coord_polar()</code>, <code>coord_trans()</code></li>
+</ul>
+</section>
+<section id="theme-layer" class="level2" data-number="7.10">
+<h2 data-number="7.10" class="anchored" data-anchor-id="theme-layer"><span class="header-section-number">7.10</span> Theme Layer</h2>
+<p>Themes layer controls all the non-data elements of the plot, such as labels, titles, background, and grid lines.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(SAeconomy_data) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> GDP, <span class="at">colour =</span> Country) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_hue</span>(<span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Time"</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"GDP Growth"</span>,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Annual GDP Growth "</span>,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"South Asian Countries"</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  ggthemes<span class="sc">::</span><span class="fu">theme_base</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 40 rows containing missing values or values outside the scale range
+(`geom_line()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dataviz_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The code above was generated with the help of the <code>esquisse</code> package.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/21_theme1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption><code>esquisse</code> package: Create visual representation</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/21_theme2.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <figcaption><code>esquisse</code> package: Create visual representation</figcaption>
 </figure>
 </div>

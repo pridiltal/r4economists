@@ -1,5 +1,5 @@
 # References {.unnumbered}
 
-R for Data Science (2e) : https://r4ds.hadley.nz/workflow-scripts.html
+Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). *R for data science*. " O'Reilly Media, Inc.".
 
-Advanced R: https://adv-r.hadley.nz/
+Wickham, H. (2019). *Advanced r*. chapman and hall/CRC.

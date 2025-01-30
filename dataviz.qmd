@@ -247,3 +247,44 @@ knitr::include_graphics("fig/20_facet_free2.png")
 ```
 
 ## Coordinates Layer
+
+Coordinates (coord) layer answer the question: Which coordinate system should be used (e.g., Cartesian, polar)? In the above example, we’ve used the Cartesian coordinate system, which is the default.
+
+There are two types of coordinate systems:
+  - Linear coordinate systems : `coord_cartesian()`, `coord_flip()`, `coord_fixed()`
+  
+  - Non-linear coordinate systems: `coord_map()`, `coord_quickmap()`, `coord_sf()`, `coord_polar()`, `coord_trans()`
+  
+  
+## Theme Layer
+
+Themes layer controls all the non-data elements of the plot, such as labels, titles, background, and grid lines.
+
+
+```{r}
+ggplot(SAeconomy_data) +
+  aes(x = Year, y = GDP, colour = Country) +
+  geom_line() +
+  scale_color_hue(direction = 1) +
+  labs(
+    x = "Time",
+    y = "GDP Growth",
+    title = "Annual GDP Growth ",
+    subtitle = "South Asian Countries"
+  ) +
+  ggthemes::theme_base()
+
+
+```
+
+The code above was generated with the help of the `esquisse` package.
+
+
+```{r   out.width = "100%", echo = FALSE, fig.align='center', fig.cap="`esquisse` package: Create visual representation"}
+knitr::include_graphics("fig/21_theme1.png")
+```
+
+
+```{r   out.width = "100%", echo = FALSE, fig.align='center', fig.cap="`esquisse` package: Create visual representation"}
+knitr::include_graphics("fig/21_theme2.png")
+```
