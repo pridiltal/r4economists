@@ -364,7 +364,47 @@
     "href": "dataviz.html#geometries-layer",
     "title": "7  Data Visualization",
     "section": "7.4 Geometries Layer",
-    "text": "7.4 Geometries Layer\nThe Geometries layer is concerned with the shape of the data. In this case, since I have a time series, I can represent the data by using a line to show how the values change over the years.\nWe connect each layer with a plus sign (+), because it essentially “adds layers” to the existing plot, building on top of what was already defined.\n\nggplot(data =  SLeconomy,\n       mapping = aes(x = Year,\n                     y = GDP)) + \n  geom_line()",
+    "text": "7.4 Geometries Layer\nThe Geometries layer is concerned with the shape of the data. In this case, since I have a time series, I can represent the data by using a line to show how the values change over the years.\nWe connect each layer with a plus sign (+), because it essentially “adds layers” to the existing plot, building on top of what was already defined.\n\nggplot(data =  SLeconomy,\n       mapping = aes(x = Year,\n                     y = GDP)) + \n  geom_line()\n\n\n\n\n\n\n\n\nAlthough the grammar of graphics framework has 8 layers, only 3 are necessary to create a meaningful plot. The other layers are optional.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "dataviz.html#visualize-data-like-a-pro-in-ggplot2-with-esquisse-package",
+    "href": "dataviz.html#visualize-data-like-a-pro-in-ggplot2-with-esquisse-package",
+    "title": "7  Data Visualization",
+    "section": "7.5 Visualize Data Like a Pro in ggplot2 with esquisse package",
+    "text": "7.5 Visualize Data Like a Pro in ggplot2 with esquisse package\nWhen you install R, it automatically adds some packages. One important package is the Esquisse package, which helps you explore and visualize your data interactively.\nIn RStudio, you can use the Addins menu to launch the esquisse. Select ‘ggplot2’ builder under the ESQUISSE option.\n\n\n\n\n\nesquisse package\n\n\n\n\nOr in the R console run:\n\nesquisser()\n\nA window will appear for importing data. If you have active datasets in your current working directory, you can select the required dataset from the ‘Select a data.frame:’ dropdown menu under the Environment panel.\n\n\n\n\n\nesquisse package: Import active dataframe\n\n\n\n\nIf you want to load an external file, go to the ‘External File’ panel, upload the file and select import.\n\n\n\n\n\nesquisse package: Import external datafile\n\n\n\n\nLet’s try to recreate the same plot we made earlier using the esquisse package.\nTo select aesthetics, click the gear icon in the top right corner, then drag and drop the options into the aesthetics boxes to create your plot.\n\n\n\n\n\nesquisse package: Create visual representation\n\n\n\n\nNow you can get the code for this visualization by using the ‘Reverse Engineer Your Visualizations’ option. Just select ‘Code’ to see it.\n\n\n\n\n\nesquisse package: Create visual representation",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "dataviz.html#statistics-layer",
+    "href": "dataviz.html#statistics-layer",
+    "title": "7  Data Visualization",
+    "section": "7.6 Statistics Layer",
+    "text": "7.6 Statistics Layer\nSometimes, certain plots require the calculation of summary statistics. For example, to create a pie chart, you need percentages, or to produce a box plot, you need five summary statistics: the quartiles, minimum, and maximum. This is where the statistics layer comes in.\nHowever, in practice, we rarely call the statistics layer directly. That’s because most of the statistical calculations are done automatically behind the scenes when creating geometric shapes. As a result, we don’t usually define them explicitly; the geom layer handles that for us. Each geom has a default stat.\n\n\n\nStatistics\nGeometries\n\n\n\n\nstat_count\ngeom_bar\n\n\nstat_boxplot\ngeom_boxplot\n\n\nstat_identity\ngeom_col\n\n\nstat_bin\ngeom_bar, geom_histogram\n\n\nstat_density\ngeom_density",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "dataviz.html#scales-layer",
+    "href": "dataviz.html#scales-layer",
+    "title": "7  Data Visualization",
+    "section": "7.7 Scales Layer",
+    "text": "7.7 Scales Layer\nThe scales layer in ggplot2 defines how the data values are mapped to visual properties, such as colors, sizes, and positions in the plot. For example, you can change the scale of the x or y-axis, adjust color gradients, or set custom limits for the data values using the scales layer.\n\nggplot(SAeconomy_data) +\n  aes(x = Year, \n      y = GDP, \n      colour = Country,\n      shape = Country) +\n  geom_line() +\n  scale_x_continuous( breaks = c(1960, 1980, 2000, 2010, 2017)) +\n  scale_colour_viridis_d(direction = 1, option= 'plasma') +\n  scale_shape_manual( values = 17:24) \n\nWarning: Removed 40 rows containing missing values or values outside the scale range\n(`geom_line()`).",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "dataviz.html#facets-layer",
+    "href": "dataviz.html#facets-layer",
+    "title": "7  Data Visualization",
+    "section": "7.8 Facets Layer",
+    "text": "7.8 Facets Layer\nThe Facets layer answers the question: Should the data be split into multiple panels for easier comparison?\n\nggplot(SAeconomy_data) +\n aes(x = Year, y = GDP, colour = Country) +\n geom_line() +\n scale_color_viridis_d(option = \"plasma\", \n direction = 1) +\n theme_minimal() +\n facet_wrap(vars(Country))\n\nWarning: Removed 40 rows containing missing values or values outside the scale range\n(`geom_line()`).\n\n\n\n\n\n\n\n\n\nThe code above was generated with the help of the esquisse package. I used ‘country’ as a facet variable to divide the data into multiple panels for better comparison.\n\n\n\n\n\nesquisse package: Create visual representation\n\n\n\n\nNow we can see that the y-axis follows a common scale, which makes it difficult to observe the temporal pattern for low GDP levels, as the series with higher values dominate the visualization. To address this, we can set the scales argument in facet_wrap to ‘free_y’.\n\nggplot(SAeconomy_data) +\n aes(x = Year, y = GDP, colour = Country) +\n geom_line() +\n scale_color_hue(direction = 1) +\n theme_minimal() +\n facet_wrap(vars(Country), scales = \"free_y\")\n\nWarning: Removed 40 rows containing missing values or values outside the scale range\n(`geom_line()`).\n\n\n\n\n\n\n\n\n\nThe code above was generated with the help of the esquisse package.\n\n\n\n\n\nesquisse package: Create visual representation\n\n\n\n\n\n\n\n\n\nesquisse package: Create visual representation",
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data Visualization</span>"
     ]

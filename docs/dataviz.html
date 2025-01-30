@@ -214,6 +214,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#data-layer" id="toc-data-layer" class="nav-link" data-scroll-target="#data-layer"><span class="header-section-number">7.2</span> Data Layer</a></li>
   <li><a href="#mapping-layer" id="toc-mapping-layer" class="nav-link" data-scroll-target="#mapping-layer"><span class="header-section-number">7.3</span> Mapping Layer</a></li>
   <li><a href="#geometries-layer" id="toc-geometries-layer" class="nav-link" data-scroll-target="#geometries-layer"><span class="header-section-number">7.4</span> Geometries Layer</a></li>
+  <li><a href="#visualize-data-like-a-pro-in-ggplot2-with-esquisse-package" id="toc-visualize-data-like-a-pro-in-ggplot2-with-esquisse-package" class="nav-link" data-scroll-target="#visualize-data-like-a-pro-in-ggplot2-with-esquisse-package"><span class="header-section-number">7.5</span> Visualize Data Like a Pro in ggplot2 with <code>esquisse</code> package</a></li>
+  <li><a href="#statistics-layer" id="toc-statistics-layer" class="nav-link" data-scroll-target="#statistics-layer"><span class="header-section-number">7.6</span> Statistics Layer</a></li>
+  <li><a href="#scales-layer" id="toc-scales-layer" class="nav-link" data-scroll-target="#scales-layer"><span class="header-section-number">7.7</span> Scales Layer</a></li>
+  <li><a href="#facets-layer" id="toc-facets-layer" class="nav-link" data-scroll-target="#facets-layer"><span class="header-section-number">7.8</span> Facets Layer</a></li>
   </ul>
 </nav>
     </div>
@@ -386,6 +390,208 @@ dbl (7): Year, GDP, Growth, CPI, Imports, Exports, Population
 <div>
 <figure class="figure">
 <p><img src="dataviz_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Although the grammar of graphics framework has 8 layers, only 3 are necessary to create a meaningful plot. The other layers are optional.</p>
+</section>
+<section id="visualize-data-like-a-pro-in-ggplot2-with-esquisse-package" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="visualize-data-like-a-pro-in-ggplot2-with-esquisse-package"><span class="header-section-number">7.5</span> Visualize Data Like a Pro in ggplot2 with <code>esquisse</code> package</h2>
+<p>When you install R, it automatically adds some packages. One important package is the Esquisse package, which helps you explore and visualize your data interactively.</p>
+<p>In RStudio, you can use the Addins menu to launch the esquisse. Select ‘ggplot2’ builder under the ESQUISSE option.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/16_esquisse.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption><code>esquisse</code> package</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Or in the R console run:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">esquisser</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A window will appear for importing data. If you have active datasets in your current working directory, you can select the required dataset from the ‘Select a data.frame:’ dropdown menu under the Environment panel.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/17_exisitngfile.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption><code>esquisse</code> package: Import active dataframe</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>If you want to load an external file, go to the ‘External File’ panel, upload the file and select import.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/17_exxternalfile.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption><code>esquisse</code> package: Import external datafile</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Let’s try to recreate the same plot we made earlier using the <code>esquisse</code> package.</p>
+<p>To select aesthetics, click the gear icon in the top right corner, then drag and drop the options into the aesthetics boxes to create your plot.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/18_eg_esquisse1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption><code>esquisse</code> package: Create visual representation</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Now you can get the code for this visualization by using the ‘Reverse Engineer Your Visualizations’ option. Just select ‘Code’ to see it.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/18_eg_esquisse2.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption><code>esquisse</code> package: Create visual representation</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="statistics-layer" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="statistics-layer"><span class="header-section-number">7.6</span> Statistics Layer</h2>
+<p>Sometimes, certain plots require the calculation of summary statistics. For example, to create a pie chart, you need percentages, or to produce a box plot, you need five summary statistics: the quartiles, minimum, and maximum. This is where the statistics layer comes in.</p>
+<p>However, in practice, we rarely call the statistics layer directly. That’s because most of the statistical calculations are done automatically behind the scenes when creating geometric shapes. As a result, we don’t usually define them explicitly; the geom layer handles that for us. Each geom has a default stat.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Statistics</th>
+<th>Geometries</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>stat_count</code></td>
+<td><code>geom_bar</code></td>
+</tr>
+<tr class="even">
+<td><code>stat_boxplot</code></td>
+<td><code>geom_boxplot</code></td>
+</tr>
+<tr class="odd">
+<td><code>stat_identity</code></td>
+<td><code>geom_col</code></td>
+</tr>
+<tr class="even">
+<td><code>stat_bin</code></td>
+<td><code>geom_bar</code>, <code>geom_histogram</code></td>
+</tr>
+<tr class="odd">
+<td><code>stat_density</code></td>
+<td><code>geom_density</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="scales-layer" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="scales-layer"><span class="header-section-number">7.7</span> Scales Layer</h2>
+<p>The scales layer in ggplot2 defines how the data values are mapped to visual properties, such as colors, sizes, and positions in the plot. For example, you can change the scale of the x or y-axis, adjust color gradients, or set custom limits for the data values using the scales layer.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(SAeconomy_data) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Year, </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> GDP, </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> Country,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">shape =</span> Country) <span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>( <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1960</span>, <span class="dv">1980</span>, <span class="dv">2000</span>, <span class="dv">2010</span>, <span class="dv">2017</span>)) <span class="sc">+</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_viridis_d</span>(<span class="at">direction =</span> <span class="dv">1</span>, <span class="at">option=</span> <span class="st">'plasma'</span>) <span class="sc">+</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>( <span class="at">values =</span> <span class="dv">17</span><span class="sc">:</span><span class="dv">24</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 40 rows containing missing values or values outside the scale range
+(`geom_line()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dataviz_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="facets-layer" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="facets-layer"><span class="header-section-number">7.8</span> Facets Layer</h2>
+<p>The Facets layer answers the question: Should the data be split into multiple panels for easier comparison?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(SAeconomy_data) <span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> GDP, <span class="at">colour =</span> Country) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_color_viridis_d</span>(<span class="at">option =</span> <span class="st">"plasma"</span>, </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a> <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(Country))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 40 rows containing missing values or values outside the scale range
+(`geom_line()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dataviz_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The code above was generated with the help of the <code>esquisse</code> package. I used ‘country’ as a facet variable to divide the data into multiple panels for better comparison.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/19_facet.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption><code>esquisse</code> package: Create visual representation</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Now we can see that the y-axis follows a common scale, which makes it difficult to observe the temporal pattern for low GDP levels, as the series with higher values dominate the visualization. To address this, we can set the scales argument in <code>facet_wrap</code> to ‘free_y’.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(SAeconomy_data) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> GDP, <span class="at">colour =</span> Country) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_color_hue</span>(<span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(Country), <span class="at">scales =</span> <span class="st">"free_y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 40 rows containing missing values or values outside the scale range
+(`geom_line()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="dataviz_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The code above was generated with the help of the <code>esquisse</code> package.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/20_facet_free1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption><code>esquisse</code> package: Create visual representation</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/20_facet_free2.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption><code>esquisse</code> package: Create visual representation</figcaption>
 </figure>
 </div>
 </div>

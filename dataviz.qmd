@@ -18,27 +18,25 @@ knitr::include_graphics("fig/15_GGapi.png")
 
 In each layer, we aim to answer a specific question:
 
-- **Data – What dataset should be used for the visualization?**
+-   **Data – What dataset should be used for the visualization?**
 
-- **Mapping (Aesthetics - aes) – How should the data be mapped to visual properties? (e.g., x-axis, y-axis, color, size)***
+-   **Mapping (Aesthetics - aes) – How should the data be mapped to visual properties? (e.g., x-axis, y-axis, color, size)**\*
 
-- Statistics (stat) – Should any transformations or summaries be applied? (e.g., smoothing, binning, aggregation)
+-   Statistics (stat) – Should any transformations or summaries be applied? (e.g., smoothing, binning, aggregation)
 
-- Scales – How should data values be translated into visual properties? (e.g., color gradients, axis scales)
+-   Scales – How should data values be translated into visual properties? (e.g., color gradients, axis scales)
 
-- **Geometries (geom) – What type of plot best represents the data? (e.g., points, lines, bars)**
+-   **Geometries (geom) – What type of plot best represents the data? (e.g., points, lines, bars)**
 
-- Facets – Should the data be divided into multiple panels for better comparison?
+-   Facets – Should the data be divided into multiple panels for better comparison?
 
-- Coordinates (coord) – Which coordinate system should be used? (e.g., Cartesian, polar)
+-   Coordinates (coord) – Which coordinate system should be used? (e.g., Cartesian, polar)
 
-- Theme – How should the overall appearance of the plot be styled? (e.g., fonts, background, gridlines)
-
+-   Theme – How should the overall appearance of the plot be styled? (e.g., fonts, background, gridlines)
 
 By layering these components, ggplot2 provides a flexible and structured approach to building effective visualizations
 
-
-Now, let's see how to create a plot using ggplot2. 
+Now, let's see how to create a plot using ggplot2.
 
 Let's start with the foundational layer: the data layer
 
@@ -52,21 +50,21 @@ In this example, I am going to use South Asian economic indicators from the Worl
 
 **Dataset Glossary (Column-wise)**
 
-Country:	The country or region of the series.
+Country: The country or region of the series.
 
-GDP:	Gross domestic product (in $USD February 2019).
+GDP: Gross domestic product (in \$USD February 2019).
 
-Growth:	Annual percentage growth in GDP.
+Growth: Annual percentage growth in GDP.
 
-CPI:	Consumer price index (base year 2010).
+CPI: Consumer price index (base year 2010).
 
-Imports:	Imports of goods and services (% of GDP).
+Imports: Imports of goods and services (% of GDP).
 
-Exports:	Exports of goods and services (% of GDP).
+Exports: Exports of goods and services (% of GDP).
 
-Population:	Total population.
+Population: Total population.
 
-For the initial exploration, I am going to filter the economic health data specifically related to Sri Lanka and analyze the country's economic health . 
+For the initial exploration, I am going to filter the economic health data specifically related to Sri Lanka and analyze the country's economic health .
 
 ```{r}
 library(tidyverse)
@@ -77,17 +75,19 @@ SLeconomy <- SAeconomy_data |>
 
 SLeconomy
 ```
+
 A ggplot function call begins with the `ggplot()` function.
 
 ```{r}
 ggplot()
 ```
-This call is similar to taking a blank piece of paper to draw a plot, where you set the foundation for what will be visualized. In the data layer, you have to specify what dataset you want to use for the visualization. In this case, the dataset will be the economic health data for Sri Lanka.
 
+This call is similar to taking a blank piece of paper to draw a plot, where you set the foundation for what will be visualized. In the data layer, you have to specify what dataset you want to use for the visualization. In this case, the dataset will be the economic health data for Sri Lanka.
 
 ```{r}
 ggplot(data =  SLeconomy)
 ```
+
 You're still getting the same result because ggplot() doesn't know how to work with the dataset until you tell it what to plot and how to map the data to the axes and visual elements.
 
 This is done using the second layer, the Mapping layer.
@@ -101,6 +101,7 @@ ggplot(data =  SLeconomy,
        mapping = aes(x = Year,
                      y = GDP))
 ```
+
 With the Mapping layer, we define what we want to see on the graph. For example, if I want to see the trend in the GDP series over the years, I select the relevant columns and map them to the x-axis and y-axis. This will label the axes with the selected variable names. However, you still can't see a visual representation in the plotting panel. That's because you need to specify how to draw the plot and what kind of geometry to use to represent the data values. This is where the Geometries layer comes in.
 
 ## Geometries Layer
@@ -115,3 +116,134 @@ ggplot(data =  SLeconomy,
                      y = GDP)) + 
   geom_line()
 ```
+
+
+Although the grammar of graphics framework has 8 layers, only 3 are necessary to create a meaningful plot. The other layers are optional.
+
+
+## Visualize Data Like a Pro in ggplot2 with `esquisse` package 
+
+When you install R, it automatically adds some packages. One important package is the Esquisse package, which helps you explore and visualize your data interactively.
+
+In RStudio, you can use the Addins menu to launch the esquisse. Select 'ggplot2' builder under the ESQUISSE option.
+
+
+```{r   out.width = "100%", echo = FALSE, fig.align='center', fig.cap="`esquisse` package"}
+knitr::include_graphics("fig/16_esquisse.png")
+```
+
+Or in the R console run:
+
+```{r eval=FALSE}
+esquisser()
+```
+
+A window will appear for importing data. If you have active datasets in your current working directory, you can select the required dataset from the 'Select a data.frame:' dropdown menu under the Environment panel.
+
+```{r   out.width = "100%", echo = FALSE, fig.align='center', fig.cap="`esquisse` package: Import active dataframe"}
+knitr::include_graphics("fig/17_exisitngfile.png")
+```
+
+If you want to load an external file, go to the 'External File' panel, upload the file and select import.
+
+
+```{r   out.width = "100%", echo = FALSE, fig.align='center', fig.cap="`esquisse` package: Import external datafile"}
+knitr::include_graphics("fig/17_exxternalfile.png")
+```
+
+Let's try to recreate the same plot we made earlier using the `esquisse` package. 
+
+To select aesthetics, click the gear icon in the top right corner, then drag and drop the options into the aesthetics boxes to create your plot.
+
+
+```{r   out.width = "100%", echo = FALSE, fig.align='center', fig.cap="`esquisse` package: Create visual representation"}
+knitr::include_graphics("fig/18_eg_esquisse1.png")
+```
+
+
+Now you can get the code for this visualization by using the 'Reverse Engineer Your Visualizations' option. Just select 'Code' to see it.
+
+```{r   out.width = "100%", echo = FALSE, fig.align='center', fig.cap="`esquisse` package: Create visual representation"}
+knitr::include_graphics("fig/18_eg_esquisse2.png")
+```
+
+
+## Statistics Layer
+
+Sometimes, certain plots require the calculation of summary statistics. For example, to create a pie chart, you need percentages, or to produce a box plot, you need five summary statistics: the quartiles, minimum, and maximum. This is where the statistics layer comes in. 
+
+However, in practice, we rarely call the statistics layer directly. That's because most of the statistical calculations are done automatically behind the scenes when creating geometric shapes. As a result, we don’t usually define them explicitly; the geom layer handles that for us. Each geom has a default stat.
+
+Statistics  | Geometries
+------------|----------
+`stat_count` | `geom_bar`
+`stat_boxplot` | `geom_boxplot`
+`stat_identity` | `geom_col`
+`stat_bin`  | `geom_bar`, `geom_histogram`
+`stat_density` | `geom_density`
+
+
+## Scales Layer
+
+The scales layer in ggplot2 defines how the data values are mapped to visual properties, such as colors, sizes, and positions in the plot. For example, you can change the scale of the x or y-axis, adjust color gradients, or set custom limits for the data values using the scales layer.
+
+
+```{r}
+ggplot(SAeconomy_data) +
+  aes(x = Year, 
+      y = GDP, 
+      colour = Country,
+      shape = Country) +
+  geom_line() +
+  scale_x_continuous( breaks = c(1960, 1980, 2000, 2010, 2017)) +
+  scale_colour_viridis_d(direction = 1, option= 'plasma') +
+  scale_shape_manual( values = 17:24) 
+```
+
+## Facets Layer
+
+The Facets layer answers the question: Should the data be split into multiple panels for easier comparison? 
+
+
+```{r}
+ggplot(SAeconomy_data) +
+ aes(x = Year, y = GDP, colour = Country) +
+ geom_line() +
+ scale_color_viridis_d(option = "plasma", 
+ direction = 1) +
+ theme_minimal() +
+ facet_wrap(vars(Country))
+
+```
+
+The code above was generated with the help of the `esquisse` package. I used 'country' as a facet variable to divide the data into multiple panels for better comparison.
+
+```{r   out.width = "100%", echo = FALSE, fig.align='center', fig.cap="`esquisse` package: Create visual representation"}
+knitr::include_graphics("fig/19_facet.png")
+```
+
+Now we can see that the y-axis follows a common scale, which makes it difficult to observe the temporal pattern for low GDP levels, as the series with higher values dominate the visualization. To address this, we can set the scales argument in `facet_wrap` to 'free_y'.
+
+```{r}
+ggplot(SAeconomy_data) +
+ aes(x = Year, y = GDP, colour = Country) +
+ geom_line() +
+ scale_color_hue(direction = 1) +
+ theme_minimal() +
+ facet_wrap(vars(Country), scales = "free_y")
+
+```
+
+The code above was generated with the help of the `esquisse` package.
+
+
+```{r   out.width = "100%", echo = FALSE, fig.align='center', fig.cap="`esquisse` package: Create visual representation"}
+knitr::include_graphics("fig/20_facet_free1.png")
+```
+
+
+```{r   out.width = "100%", echo = FALSE, fig.align='center', fig.cap="`esquisse` package: Create visual representation"}
+knitr::include_graphics("fig/20_facet_free2.png")
+```
+
+## Coordinates Layer
