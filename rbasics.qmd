@@ -9,7 +9,7 @@
  income
 ```
 
--   Functions tell R what to do.
+    -   Functions tell R what to do.
 
 ```{r}
 mean(income)

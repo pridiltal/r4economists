@@ -4,6 +4,8 @@ Data wrangling is the process of transforming and structuring raw data into a st
 
 ## Data Tidying
 
+In this step you try to reshape messy data into a tidy format.
+
 A tidy dataset follows these key principles:
 
 -   Each variable is placed in its own column.
@@ -43,7 +45,7 @@ The `tidyr` package helps you structure data in a tidy format. This often involv
 -   Pivoting: `pivot_longer()` and `pivot_wider()`
 -   Separating or uniting columns: `separate()` and `unite()`
 
-For more details on its functionalities, refer to the `tidyr` package documentation: https://tidyr.tidyverse.org/.
+For more details on its functionalities, refer to the `tidyr` [package documentation:](https://tidyr.tidyverse.org/).
 
 A well-organized dataset saves time and ensures accurate results!
 

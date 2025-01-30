@@ -18,4 +18,4 @@ The second group is any economist who is new to programming and wants to start a
 
 ## Share Your Thoughts! {.unnumbered}
 
-This book is still a work in progress, and some chapters (marked WIP) are still in the oven—they’ll be ready soon! If you have any suggestions to improve the content, feel free to open a GitHub issue [here](https://github.com/pridiltal/r4economists/issues). I’d love to hear from you! 🚀
+This book is still a work in progress. If you have any suggestions to improve the content, feel free to open a GitHub issue [here](https://github.com/pridiltal/r4economists/issues). I’d love to hear from you! 🚀

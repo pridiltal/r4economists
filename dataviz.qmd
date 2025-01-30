@@ -117,16 +117,13 @@ ggplot(data =  SLeconomy,
   geom_line()
 ```
 
-
 Although the grammar of graphics framework has 8 layers, only 3 are necessary to create a meaningful plot. The other layers are optional.
 
-
-## Visualize Data Like a Pro in ggplot2 with `esquisse` package 
+## Visualize Data Like a Pro in ggplot2 with `esquisse` package
 
 When you install R, it automatically adds some packages. One important package is the Esquisse package, which helps you explore and visualize your data interactively.
 
 In RStudio, you can use the Addins menu to launch the esquisse. Select 'ggplot2' builder under the ESQUISSE option.
-
 
 ```{r   out.width = "100%", echo = FALSE, fig.align='center', fig.cap="`esquisse` package"}
 knitr::include_graphics("fig/16_esquisse.png")
@@ -146,20 +143,17 @@ knitr::include_graphics("fig/17_exisitngfile.png")
 
 If you want to load an external file, go to the 'External File' panel, upload the file and select import.
 
-
 ```{r   out.width = "100%", echo = FALSE, fig.align='center', fig.cap="`esquisse` package: Import external datafile"}
 knitr::include_graphics("fig/17_exxternalfile.png")
 ```
 
-Let's try to recreate the same plot we made earlier using the `esquisse` package. 
+Let's try to recreate the same plot we made earlier using the `esquisse` package.
 
 To select aesthetics, click the gear icon in the top right corner, then drag and drop the options into the aesthetics boxes to create your plot.
-
 
 ```{r   out.width = "100%", echo = FALSE, fig.align='center', fig.cap="`esquisse` package: Create visual representation"}
 knitr::include_graphics("fig/18_eg_esquisse1.png")
 ```
-
 
 Now you can get the code for this visualization by using the 'Reverse Engineer Your Visualizations' option. Just select 'Code' to see it.
 
@@ -167,26 +161,23 @@ Now you can get the code for this visualization by using the 'Reverse Engineer Y
 knitr::include_graphics("fig/18_eg_esquisse2.png")
 ```
 
-
 ## Statistics Layer
 
-Sometimes, certain plots require the calculation of summary statistics. For example, to create a pie chart, you need percentages, or to produce a box plot, you need five summary statistics: the quartiles, minimum, and maximum. This is where the statistics layer comes in. 
+Sometimes, certain plots require the calculation of summary statistics. For example, to create a pie chart, you need percentages, or to produce a box plot, you need five summary statistics: the quartiles, minimum, and maximum. This is where the statistics layer comes in.
 
 However, in practice, we rarely call the statistics layer directly. That's because most of the statistical calculations are done automatically behind the scenes when creating geometric shapes. As a result, we don’t usually define them explicitly; the geom layer handles that for us. Each geom has a default stat.
 
-Statistics  | Geometries
-------------|----------
-`stat_count` | `geom_bar`
-`stat_boxplot` | `geom_boxplot`
-`stat_identity` | `geom_col`
-`stat_bin`  | `geom_bar`, `geom_histogram`
-`stat_density` | `geom_density`
-
+| Statistics      | Geometries                   |
+|-----------------|------------------------------|
+| `stat_count`    | `geom_bar`                   |
+| `stat_boxplot`  | `geom_boxplot`               |
+| `stat_identity` | `geom_col`                   |
+| `stat_bin`      | `geom_bar`, `geom_histogram` |
+| `stat_density`  | `geom_density`               |
 
 ## Scales Layer
 
 The scales layer in ggplot2 defines how the data values are mapped to visual properties, such as colors, sizes, and positions in the plot. For example, you can change the scale of the x or y-axis, adjust color gradients, or set custom limits for the data values using the scales layer.
-
 
 ```{r}
 ggplot(SAeconomy_data) +
@@ -202,8 +193,7 @@ ggplot(SAeconomy_data) +
 
 ## Facets Layer
 
-The Facets layer answers the question: Should the data be split into multiple panels for easier comparison? 
-
+The Facets layer answers the question: Should the data be split into multiple panels for easier comparison?
 
 ```{r}
 ggplot(SAeconomy_data) +
@@ -236,11 +226,9 @@ ggplot(SAeconomy_data) +
 
 The code above was generated with the help of the `esquisse` package.
 
-
 ```{r   out.width = "100%", echo = FALSE, fig.align='center', fig.cap="`esquisse` package: Create visual representation"}
 knitr::include_graphics("fig/20_facet_free1.png")
 ```
-
 
 ```{r   out.width = "100%", echo = FALSE, fig.align='center', fig.cap="`esquisse` package: Create visual representation"}
 knitr::include_graphics("fig/20_facet_free2.png")
@@ -250,16 +238,13 @@ knitr::include_graphics("fig/20_facet_free2.png")
 
 Coordinates (coord) layer answer the question: Which coordinate system should be used (e.g., Cartesian, polar)? In the above example, we’ve used the Cartesian coordinate system, which is the default.
 
-There are two types of coordinate systems:
-  - Linear coordinate systems : `coord_cartesian()`, `coord_flip()`, `coord_fixed()`
-  
-  - Non-linear coordinate systems: `coord_map()`, `coord_quickmap()`, `coord_sf()`, `coord_polar()`, `coord_trans()`
-  
-  
+There are two types of coordinate systems: - Linear coordinate systems : `coord_cartesian()`, `coord_flip()`, `coord_fixed()`
+
+-   Non-linear coordinate systems: `coord_map()`, `coord_quickmap()`, `coord_sf()`, `coord_polar()`, `coord_trans()`
+
 ## Theme Layer
 
 Themes layer controls all the non-data elements of the plot, such as labels, titles, background, and grid lines.
-
 
 ```{r}
 ggplot(SAeconomy_data) +
@@ -279,11 +264,9 @@ ggplot(SAeconomy_data) +
 
 The code above was generated with the help of the `esquisse` package.
 
-
 ```{r   out.width = "100%", echo = FALSE, fig.align='center', fig.cap="`esquisse` package: Create visual representation"}
 knitr::include_graphics("fig/21_theme1.png")
 ```
-
 
 ```{r   out.width = "100%", echo = FALSE, fig.align='center', fig.cap="`esquisse` package: Create visual representation"}
 knitr::include_graphics("fig/21_theme2.png")

@@ -16,7 +16,7 @@
 
 -   In 2022, RStudio changed its corporate name to Posit with the aim of expanding its focus beyond R to include users of Python and Visual Studio Code.
 
--   If you don't want to download or install R and R Studio, you can use RStudio on [Posit Cloud] (https://posit.cloud/) for free.
+-   If you don't want to download or install R and R Studio, you can use RStudio on [Posit Cloud](https://posit.cloud/) for free.
 
 ## RStudio layout
 
