@@ -42,3 +42,11 @@ by Christoph Hanck, Martin Arnold, Alexander Gerber, and Martin Schmelzer
 8. [CRAN Task View: Econometrics](https://cran.r-project.org/web/views/Econometrics.html)
 
    The CRAN Task View offers a comprehensive list of R packages specifically for econometrics, providing useful tools for economic data analysis and modeling
+   
+9. [Geocomputation with R](https://r.geocompx.org/) by Robin Lovelace, Jakub Nowosad and  Jannes Muenchow 
+
+   This book covers geographic data analysis, visualization, and modeling techniques
+   
+10. The [`ceylon` R package](https://github.com/thiyangt/ceylon) by Thiyanga Talagala 
+
+   The `ceylon` R package enables easy map visualization of Sri Lanka.
