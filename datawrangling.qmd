@@ -1,3 +1,307 @@
 # Data Wrangling
 
-WIP 🚧⏳
+
+Data wrangling is the process of transforming and structuring raw data into a structured format to enhance its quality, making it easier to analyze. Data wrangling in the tidyverse workflow generally covers both tidy and transform steps int he tidy workflow. 
+
+##  Data Tidying
+
+A tidy dataset follows these key principles:
+
+- Each variable is placed in its own column.
+- Each observation is placed in its own row.
+- Each value is placed in its own cell.
+
+
+The following examples are taken from published reports by various institutes and contains an untidy data structure. This is a common issue in real-world data. The problematic areas that make the data untidy are highlighted.
+
+1. Image Source: Sri Lanka Export Development Board – Export Performance Indicators 2023
+
+```{r   out.width = "100%", echo = FALSE, fig.align='center', fig.cap="Untidy Data, Image Source: Sri Lanka Export Development Board – Export Performance Indicators 2023"}
+knitr::include_graphics("fig/11_untidydata.png")
+```
+
+In this example, certain cells contain more than one value separated by a comma, making the dataset untidy. 
+
+2. Image Source: Central Bank of Sri Lanka – Annual Report 2022
+
+
+```{r   out.width = "100%", echo = FALSE, fig.align='center', fig.cap="Untidy Data, Image Source: Central Bank of Sri Lanka – Annual Report 2022"}
+knitr::include_graphics("fig/12_untidydata.png")
+```
+
+In this example, certain cells are merged and presented as a common value using curly braces. This format makes the data untidy and difficult to analyze.
+
+3. Image Source: Disaster Management Centre, Ministry of Defense – River Water Level and Flood Warning Report
+
+```{r   out.width = "100%", echo = FALSE, fig.align='center', fig.cap="Untidy Data, Image Source: Disaster Management Centre, Ministry of Defense – River Water Level and Flood Warning Report"}
+knitr::include_graphics("fig/13_untidydata.png")
+```
+
+In this dataset, each cell in the last column contains both a value and a graphical representation, making the data untidy.
+
+The tidy step in the tidy workflow ensures that the data adheres to the tidy principles of tidy data. 
+
+The `tidyr` package helps you structure data in a tidy format.  This often involves:
+
+- Pivoting: `pivot_longer()` and `pivot_wider()`
+- Separating or uniting columns: `separate()` and `unite()` 
+
+For more details on its functionalities, refer to the `tidyr` package documentation: https://tidyr.tidyverse.org/.
+
+A well-organized dataset saves time and ensures accurate results!
+
+##  Data Transformation
+
+
+After tidying up the data, when you start analyzing it, especially with secondary data, it may not always be in the exact form you need. Sometimes, you may need to add new variables using data from other variables. Other times, you may need to filter specific rows or columns from the original dataset. You might also need to summarize the data or rename the columns properly.
+
+This is where the data transformation step comes in. 
+
+The `dplyr` package provides powerful tools to transform your data into the desired format. Some of the most commonly used functions in `dplyr` include:
+
+- `filter()` – Select specific rows based on conditions
+
+- `select()` – Choose specific columns
+
+- `mutate()` – Create or modify columns
+
+- `summarise()` – Calculate summary statistics
+
+- `arrange()` – Sort rows by a column
+
+- `group_by()` – Group data for grouped operations
+
+- `rename()` – Change column names
+
+By performing these tasks, you change the structure of the original dataset as demontrated below, which is why it’s called the data transformation step.
+
+```{r   out.width = "100%", echo = FALSE, fig.align='center', fig.cap="Data transformation,  The original image, available here https://perso.ens-lyon.fr/lise.vaudor/dplyr/, has been updated with new additions."}
+knitr::include_graphics("fig/14_transform1.png")
+```
+
+```{r   out.width = "100%", echo = FALSE, fig.align='center', fig.cap="Data transformation,  The original image, available here https://perso.ens-lyon.fr/lise.vaudor/dplyr/, has been updated with new additions."}
+knitr::include_graphics("fig/14_transform2.png")
+```
+
+
+```{r   out.width = "80%", echo = FALSE, fig.align='center', fig.cap="Data transformation,  The original image, available here https://perso.ens-lyon.fr/lise.vaudor/dplyr/, has been updated with new additions."}
+knitr::include_graphics("fig/14_transform3.png")
+```
+
+### Example
+
+Let's consider the following dataset whihc contains synthetic airline data. 
+
+[Download the dataset: airline_data.csv](data/airline_data.csv)
+Data Source: https://www.kaggle.com/datasets/iamsouravbanerjee/airline-dataset/data
+
+```{r}
+library(tidyverse)
+data <- read_csv(here::here("data", "airline_data.csv"))
+dim(data)
+```
+
+
+```{r}
+colnames(data)
+```
+
+**Dataset Glossary (Column-wise)**
+
+Passenger ID - Unique identifier for each passenger
+
+First Name - First name of the passenger
+
+Last Name - Last name of the passenger
+
+Gender - Gender of the passenger
+
+Age - Age of the passenger
+
+Nationality - Nationality of the passenger
+
+Airport Name - Name of the airport where the passenger boarded
+
+Airport Country Code - Country code of the airport's location
+
+Country Name - Name of the country the airport is located in
+
+Airport Continent - Continent where the airport is situated
+
+Continents - Continents involved in the flight route
+
+Departure Date - Date when the flight departed
+
+Arrival Airport - Destination airport of the flight
+
+Pilot Name - Name of the pilot operating the flight
+
+Flight Status - Current status of the flight (e.g., on-time, delayed, canceled)
+
+
+This synthetic dataset covers global airline operations. This dataset is useful for economists because it provides information on passenger travel patterns, flight routes, and airport locations. It helps analyze how air travel affects trade, tourism, and jobs. By looking at flight status and passenger details, economists can study the impact of aviation on the economy and make decisions about transportation policies and infrastructure development.
+
+```{r}
+data <- data |> as_tibble()
+head(data)
+```
+
+
+```{r}
+summary(data)
+
+```
+
+
+#### `filter`:  Select specific rows based on conditions
+
+- Takes logical expressions and returns the rows for which all are `TRUE`.
+
+```{r, comment=NA, message=FALSE}
+filter(data, Age > 45)
+```
+
+
+```{r, comment=NA, message=FALSE}
+filter(data,  Nationality == "Sri Lanka")
+```
+
+
+
+#### `select`: Choose specific columns by their names.
+
+
+
+```{r, comment=NA, message=FALSE, warning=FALSE}
+select(data, `Passenger ID`:Gender)
+```
+
+
+```{r, comment=NA, message=FALSE, warning=FALSE}
+select(data, `Pilot Name`, `Flight Status`)
+```
+
+
+When you pass a vector of column names with `-c()`, it omits the specified columns and returns the dataframe with the remaining columns. This option is very useful when working with large datasets that have many columns, and you only need to remove a few columns to finalize the dataset.
+
+```{r, comment=NA, message=FALSE, warning=FALSE}
+select(data, -c(`Passenger ID`, `First Name`, `Last Name`))
+```
+
+#### `mutate`: Create or modify columns
+
+- This function allows you to creates new variables from an existing variable.
+
+```{r, comment=NA, message=FALSE, warning=FALSE}
+data_new <- data |> mutate(New_Age = Age + 2)
+data_new
+```
+
+
+```{r}
+colnames(data_new)
+```
+
+
+- The same mutate function also allows you to update an existing variables.
+
+```{r, comment=NA, message=FALSE, warning=FALSE}
+data_new <- data |> mutate(`Departure Date` =as.Date(`Departure Date`, format = "%m/%d/%Y"))
+summary(data_new)
+```
+
+
+#### `summarise`(British) or `summarize` (US) :  Calculate summary statistics
+
+- this function collapses many values down to a single summary.
+
+```{r, comment=NA, message=FALSE, warning=FALSE}
+data_new |>
+  summarise(
+    Departure_Date_start =min(`Departure Date`),
+    Departure_Date_end =max(`Departure Date`),
+    Age_median=median(Age),
+    Age_mean=mean(Age))
+```
+
+
+Since it contains missing values, they should be removed before calculating the summary statistics
+
+```{r, comment=NA, message=FALSE, warning=FALSE}
+
+data_new |>
+  summarise(
+    Departure_Date_start =min(`Departure Date`, na.rm = TRUE),
+    Departure_Date_end =max(`Departure Date`, na.rm = TRUE),
+    Age_median=median(Age, na.rm = TRUE),
+    Age_mean=mean(Age, na.rm = TRUE))
+
+```
+
+#### `arrange()` – Sort rows by a column
+
+
+```{r, comment=NA, message=FALSE, warning=FALSE}
+arrange(data, desc(Age))
+```
+
+
+
+#### `group_by()` – Group data for grouped operations
+
+- This fucntion takes an existing tibble and converts it into a grouped tibble where operations are performed "by group". ungroup() removes grouping.
+
+
+```{r, comment=NA, message=FALSE, warning=FALSE}
+customers_grouped <- data |> group_by(Continents )
+customers_grouped
+```
+
+
+```{r, comment=NA, message=FALSE, warning=FALSE}
+data |> summarise(age_mean=mean(Age, na.rm=TRUE))
+```
+
+
+```{r, comment=NA, message=FALSE, warning=FALSE}
+customers_grouped |> summarise(age_mean=mean(Age, na.rm=TRUE))
+```
+
+
+#### `rename()` – Change column names
+
+
+
+```{r, comment=NA, message=FALSE, warning=FALSE}
+data <- rename(data,  Passenger_ID = `Passenger ID`,
+       Airport_code = `Airport Country Code` ) # new_name = old_name
+data
+```
+
+#### Combine multiple operations
+
+
+You can even combine multiple verbs at once to obtain the dataset in the desired structure. This is where the pipe operator becomes very handy.
+
+```{r, comment=NA, message=FALSE}
+data |>
+  filter(Nationality == "Sri Lanka") |>
+  head(2)
+```
+
+
+```{r, comment=NA, message=FALSE}
+data |>
+  filter(Nationality == "Sri Lanka") |>
+  summarise(Age_mean=mean(Age, na.rm=TRUE))
+```
+
+```{r, comment=NA}
+data_new |>
+  filter(Nationality == "Sri Lanka") |>
+  group_by(Gender) |>
+  filter(Age > 45) |>
+  arrange(desc(`Departure Date`))
+```
+
+

@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -171,8 +205,18 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#data-tidying" id="toc-data-tidying" class="nav-link active" data-scroll-target="#data-tidying"><span class="header-section-number">6.1</span> Data Tidying</a></li>
+  <li><a href="#data-transformation" id="toc-data-transformation" class="nav-link" data-scroll-target="#data-transformation"><span class="header-section-number">6.2</span> Data Transformation</a>
+  <ul class="collapse">
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">6.2.1</span> Example</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -196,9 +240,623 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>WIP 🚧⏳</p>
+<p>Data wrangling is the process of transforming and structuring raw data into a structured format to enhance its quality, making it easier to analyze. Data wrangling in the tidyverse workflow generally covers both tidy and transform steps int he tidy workflow.</p>
+<section id="data-tidying" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="data-tidying"><span class="header-section-number">6.1</span> Data Tidying</h2>
+<p>A tidy dataset follows these key principles:</p>
+<ul>
+<li>Each variable is placed in its own column.</li>
+<li>Each observation is placed in its own row.</li>
+<li>Each value is placed in its own cell.</li>
+</ul>
+<p>The following examples are taken from published reports by various institutes and contains an untidy data structure. This is a common issue in real-world data. The problematic areas that make the data untidy are highlighted.</p>
+<ol type="1">
+<li>Image Source: Sri Lanka Export Development Board – Export Performance Indicators 2023</li>
+</ol>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/11_untidydata.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Untidy Data, Image Source: Sri Lanka Export Development Board – Export Performance Indicators 2023</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In this example, certain cells contain more than one value separated by a comma, making the dataset untidy.</p>
+<ol start="2" type="1">
+<li>Image Source: Central Bank of Sri Lanka – Annual Report 2022</li>
+</ol>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/12_untidydata.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Untidy Data, Image Source: Central Bank of Sri Lanka – Annual Report 2022</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In this example, certain cells are merged and presented as a common value using curly braces. This format makes the data untidy and difficult to analyze.</p>
+<ol start="3" type="1">
+<li>Image Source: Disaster Management Centre, Ministry of Defense – River Water Level and Flood Warning Report</li>
+</ol>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/13_untidydata.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Untidy Data, Image Source: Disaster Management Centre, Ministry of Defense – River Water Level and Flood Warning Report</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In this dataset, each cell in the last column contains both a value and a graphical representation, making the data untidy.</p>
+<p>The tidy step in the tidy workflow ensures that the data adheres to the tidy principles of tidy data.</p>
+<p>The <code>tidyr</code> package helps you structure data in a tidy format. This often involves:</p>
+<ul>
+<li>Pivoting: <code>pivot_longer()</code> and <code>pivot_wider()</code></li>
+<li>Separating or uniting columns: <code>separate()</code> and <code>unite()</code></li>
+</ul>
+<p>For more details on its functionalities, refer to the <code>tidyr</code> package documentation: https://tidyr.tidyverse.org/.</p>
+<p>A well-organized dataset saves time and ensures accurate results!</p>
+</section>
+<section id="data-transformation" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="data-transformation"><span class="header-section-number">6.2</span> Data Transformation</h2>
+<p>After tidying up the data, when you start analyzing it, especially with secondary data, it may not always be in the exact form you need. Sometimes, you may need to add new variables using data from other variables. Other times, you may need to filter specific rows or columns from the original dataset. You might also need to summarize the data or rename the columns properly.</p>
+<p>This is where the data transformation step comes in.</p>
+<p>The <code>dplyr</code> package provides powerful tools to transform your data into the desired format. Some of the most commonly used functions in <code>dplyr</code> include:</p>
+<ul>
+<li><p><code>filter()</code> – Select specific rows based on conditions</p></li>
+<li><p><code>select()</code> – Choose specific columns</p></li>
+<li><p><code>mutate()</code> – Create or modify columns</p></li>
+<li><p><code>summarise()</code> – Calculate summary statistics</p></li>
+<li><p><code>arrange()</code> – Sort rows by a column</p></li>
+<li><p><code>group_by()</code> – Group data for grouped operations</p></li>
+<li><p><code>rename()</code> – Change column names</p></li>
+</ul>
+<p>By performing these tasks, you change the structure of the original dataset as demontrated below, which is why it’s called the data transformation step.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/14_transform1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Data transformation, The original image, available here https://perso.ens-lyon.fr/lise.vaudor/dplyr/, has been updated with new additions.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/14_transform2.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Data transformation, The original image, available here https://perso.ens-lyon.fr/lise.vaudor/dplyr/, has been updated with new additions.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/14_transform3.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Data transformation, The original image, available here https://perso.ens-lyon.fr/lise.vaudor/dplyr/, has been updated with new additions.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<section id="example" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="example"><span class="header-section-number">6.2.1</span> Example</h3>
+<p>Let’s consider the following dataset whihc contains synthetic airline data.</p>
+<p><a href="data/airline_data.csv">Download the dataset: airline_data.csv</a> Data Source: https://www.kaggle.com/datasets/iamsouravbanerjee/airline-dataset/data</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"airline_data.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 98619 Columns: 15
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (14): Passenger ID, First Name, Last Name, Gender, Nationality, Airport ...
+dbl  (1): Age
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 98619    15</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Passenger ID"         "First Name"           "Last Name"           
+ [4] "Gender"               "Age"                  "Nationality"         
+ [7] "Airport Name"         "Airport Country Code" "Country Name"        
+[10] "Airport Continent"    "Continents"           "Departure Date"      
+[13] "Arrival Airport"      "Pilot Name"           "Flight Status"       </code></pre>
+</div>
+</div>
+<p><strong>Dataset Glossary (Column-wise)</strong></p>
+<p>Passenger ID - Unique identifier for each passenger</p>
+<p>First Name - First name of the passenger</p>
+<p>Last Name - Last name of the passenger</p>
+<p>Gender - Gender of the passenger</p>
+<p>Age - Age of the passenger</p>
+<p>Nationality - Nationality of the passenger</p>
+<p>Airport Name - Name of the airport where the passenger boarded</p>
+<p>Airport Country Code - Country code of the airport’s location</p>
+<p>Country Name - Name of the country the airport is located in</p>
+<p>Airport Continent - Continent where the airport is situated</p>
+<p>Continents - Continents involved in the flight route</p>
+<p>Departure Date - Date when the flight departed</p>
+<p>Arrival Airport - Destination airport of the flight</p>
+<p>Pilot Name - Name of the pilot operating the flight</p>
+<p>Flight Status - Current status of the flight (e.g., on-time, delayed, canceled)</p>
+<p>This synthetic dataset covers global airline operations. This dataset is useful for economists because it provides information on passenger travel patterns, flight routes, and airport locations. It helps analyze how air travel affects trade, tourism, and jobs. By looking at flight status and passenger details, economists can study the impact of aviation on the economy and make decisions about transportation policies and infrastructure development.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> <span class="fu">as_tibble</span>()</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 15
+  `Passenger ID` `First Name` `Last Name` Gender   Age Nationality
+  &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;      
+1 ABVWIg         Edithe       Leggis      Female    62 Japan      
+2 jkXXAX         Elwood       Catt        Male      62 Nicaragua  
+3 CdUz2g         Darby        Felgate     Male      67 Russia     
+4 BRS38V         Dominica     Pyle        Female    71 China      
+5 9kvTLo         Bay          Pencost     Male      21 China      
+6 nMJKVh         Lora         Durbann     Female    55 Brazil     
+# ℹ 9 more variables: `Airport Name` &lt;chr&gt;, `Airport Country Code` &lt;chr&gt;,
+#   `Country Name` &lt;chr&gt;, `Airport Continent` &lt;chr&gt;, Continents &lt;chr&gt;,
+#   `Departure Date` &lt;chr&gt;, `Arrival Airport` &lt;chr&gt;, `Pilot Name` &lt;chr&gt;,
+#   `Flight Status` &lt;chr&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Passenger ID        First Name         Last Name            Gender         
+ Length:98619       Length:98619       Length:98619       Length:98619      
+ Class :character   Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+                                                                            
+                                                                            
+                                                                            
+      Age       Nationality        Airport Name       Airport Country Code
+ Min.   : 1.0   Length:98619       Length:98619       Length:98619        
+ 1st Qu.:23.0   Class :character   Class :character   Class :character    
+ Median :46.0   Mode  :character   Mode  :character   Mode  :character    
+ Mean   :45.5                                                             
+ 3rd Qu.:68.0                                                             
+ Max.   :90.0                                                             
+ Country Name       Airport Continent   Continents        Departure Date    
+ Length:98619       Length:98619       Length:98619       Length:98619      
+ Class :character   Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+                                                                            
+                                                                            
+                                                                            
+ Arrival Airport     Pilot Name        Flight Status     
+ Length:98619       Length:98619       Length:98619      
+ Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character  
+                                                         
+                                                         
+                                                         </code></pre>
+</div>
+</div>
+<section id="filter-select-specific-rows-based-on-conditions" class="level4" data-number="6.2.1.1">
+<h4 data-number="6.2.1.1" class="anchored" data-anchor-id="filter-select-specific-rows-based-on-conditions"><span class="header-section-number">6.2.1.1</span> <code>filter</code>: Select specific rows based on conditions</h4>
+<ul>
+<li>Takes logical expressions and returns the rows for which all are <code>TRUE</code>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(data, Age <span class="sc">&gt;</span> <span class="dv">45</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 49,383 × 15
+   `Passenger ID` `First Name` `Last Name` Gender   Age Nationality
+   &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;      
+ 1 ABVWIg         Edithe       Leggis      Female    62 Japan      
+ 2 jkXXAX         Elwood       Catt        Male      62 Nicaragua  
+ 3 CdUz2g         Darby        Felgate     Male      67 Russia     
+ 4 BRS38V         Dominica     Pyle        Female    71 China      
+ 5 nMJKVh         Lora         Durbann     Female    55 Brazil     
+ 6 8IPFPE         Rand         Bram        Male      73 Ivory Coast
+ 7 sBf524         Briant       De La Haye  Male      71 Russia     
+ 8 PlwJZT         Kalie        Scoble      Female    47 Sweden     
+ 9 iU75x3         Catriona     Beaument    Female    77 Russia     
+10 e0H5LI         Jerrine      Peeters     Female    87 Philippines
+# ℹ 49,373 more rows
+# ℹ 9 more variables: `Airport Name` &lt;chr&gt;, `Airport Country Code` &lt;chr&gt;,
+#   `Country Name` &lt;chr&gt;, `Airport Continent` &lt;chr&gt;, Continents &lt;chr&gt;,
+#   `Departure Date` &lt;chr&gt;, `Arrival Airport` &lt;chr&gt;, `Pilot Name` &lt;chr&gt;,
+#   `Flight Status` &lt;chr&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(data,  Nationality <span class="sc">==</span> <span class="st">"Sri Lanka"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 138 × 15
+   `Passenger ID` `First Name` `Last Name` Gender   Age Nationality
+   &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;      
+ 1 fhD57Z         Jordan       Fierman     Female    11 Sri Lanka  
+ 2 5joYmi         Valdemar     Marcone     Male       7 Sri Lanka  
+ 3 2ROpnA         Jordon       Sallowaye   Male      43 Sri Lanka  
+ 4 eKkekT         Dael         Edlestone   Female    58 Sri Lanka  
+ 5 5TxM24         Hiram        Memory      Male      21 Sri Lanka  
+ 6 wQVX9G         Sherm        Kippie      Male      60 Sri Lanka  
+ 7 fKtiLJ         Filippa      Prestige    Female    53 Sri Lanka  
+ 8 q7uPji         Wainwright   Dunkerton   Male      47 Sri Lanka  
+ 9 Tn9LGe         Matty        Alflat      Male       6 Sri Lanka  
+10 fZsoAD         Rowney       Messitt     Male      43 Sri Lanka  
+# ℹ 128 more rows
+# ℹ 9 more variables: `Airport Name` &lt;chr&gt;, `Airport Country Code` &lt;chr&gt;,
+#   `Country Name` &lt;chr&gt;, `Airport Continent` &lt;chr&gt;, Continents &lt;chr&gt;,
+#   `Departure Date` &lt;chr&gt;, `Arrival Airport` &lt;chr&gt;, `Pilot Name` &lt;chr&gt;,
+#   `Flight Status` &lt;chr&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="select-choose-specific-columns-by-their-names." class="level4" data-number="6.2.1.2">
+<h4 data-number="6.2.1.2" class="anchored" data-anchor-id="select-choose-specific-columns-by-their-names."><span class="header-section-number">6.2.1.2</span> <code>select</code>: Choose specific columns by their names.</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(data, <span class="st">`</span><span class="at">Passenger ID</span><span class="st">`</span><span class="sc">:</span>Gender)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 98,619 × 4
+   `Passenger ID` `First Name` `Last Name` Gender
+   &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt; 
+ 1 ABVWIg         Edithe       Leggis      Female
+ 2 jkXXAX         Elwood       Catt        Male  
+ 3 CdUz2g         Darby        Felgate     Male  
+ 4 BRS38V         Dominica     Pyle        Female
+ 5 9kvTLo         Bay          Pencost     Male  
+ 6 nMJKVh         Lora         Durbann     Female
+ 7 8IPFPE         Rand         Bram        Male  
+ 8 pqixbY         Perceval     Dallosso    Male  
+ 9 QNAs2R         Aleda        Pigram      Female
+10 3jmudz         Burlie       Schustl     Male  
+# ℹ 98,609 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(data, <span class="st">`</span><span class="at">Pilot Name</span><span class="st">`</span>, <span class="st">`</span><span class="at">Flight Status</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 98,619 × 2
+   `Pilot Name`        `Flight Status`
+   &lt;chr&gt;               &lt;chr&gt;          
+ 1 Fransisco Hazeldine On Time        
+ 2 Marla Parsonage     On Time        
+ 3 Rhonda Amber        On Time        
+ 4 Kacie Commucci      Delayed        
+ 5 Ebonee Tree         On Time        
+ 6 Inglis Dolley       On Time        
+ 7 Stanislas Tiffin    Cancelled      
+ 8 Sharyl Eastmead     Cancelled      
+ 9 Daryn Bardsley      On Time        
+10 Alameda Carlyle     On Time        
+# ℹ 98,609 more rows</code></pre>
+</div>
+</div>
+<p>When you pass a vector of column names with <code>-c()</code>, it omits the specified columns and returns the dataframe with the remaining columns. This option is very useful when working with large datasets that have many columns, and you only need to remove a few columns to finalize the dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(data, <span class="sc">-</span><span class="fu">c</span>(<span class="st">`</span><span class="at">Passenger ID</span><span class="st">`</span>, <span class="st">`</span><span class="at">First Name</span><span class="st">`</span>, <span class="st">`</span><span class="at">Last Name</span><span class="st">`</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 98,619 × 12
+   Gender   Age Nationality `Airport Name` `Airport Country Code` `Country Name`
+   &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;          &lt;chr&gt;                  &lt;chr&gt;         
+ 1 Female    62 Japan       Coldfoot Airp… US                     United States 
+ 2 Male      62 Nicaragua   Kugluktuk Air… CA                     Canada        
+ 3 Male      67 Russia      Grenoble-Isèr… FR                     France        
+ 4 Female    71 China       Ottawa / Gati… CA                     Canada        
+ 5 Male      21 China       Gillespie Fie… US                     United States 
+ 6 Female    55 Brazil      Coronel Horác… BR                     Brazil        
+ 7 Male      73 Ivory Coast Duxford Aerod… GB                     United Kingdom
+ 8 Male      36 Vietnam     Maestro Wilso… BR                     Brazil        
+ 9 Female    35 Palestinia… Venice Marco … IT                     Italy         
+10 Male      13 Thailand    Vermilion Air… CA                     Canada        
+# ℹ 98,609 more rows
+# ℹ 6 more variables: `Airport Continent` &lt;chr&gt;, Continents &lt;chr&gt;,
+#   `Departure Date` &lt;chr&gt;, `Arrival Airport` &lt;chr&gt;, `Pilot Name` &lt;chr&gt;,
+#   `Flight Status` &lt;chr&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="mutate-create-or-modify-columns" class="level4" data-number="6.2.1.3">
+<h4 data-number="6.2.1.3" class="anchored" data-anchor-id="mutate-create-or-modify-columns"><span class="header-section-number">6.2.1.3</span> <code>mutate</code>: Create or modify columns</h4>
+<ul>
+<li>This function allows you to creates new variables from an existing variable.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>data_new <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">New_Age =</span> Age <span class="sc">+</span> <span class="dv">2</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>data_new</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 98,619 × 16
+   `Passenger ID` `First Name` `Last Name` Gender   Age Nationality          
+   &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;                
+ 1 ABVWIg         Edithe       Leggis      Female    62 Japan                
+ 2 jkXXAX         Elwood       Catt        Male      62 Nicaragua            
+ 3 CdUz2g         Darby        Felgate     Male      67 Russia               
+ 4 BRS38V         Dominica     Pyle        Female    71 China                
+ 5 9kvTLo         Bay          Pencost     Male      21 China                
+ 6 nMJKVh         Lora         Durbann     Female    55 Brazil               
+ 7 8IPFPE         Rand         Bram        Male      73 Ivory Coast          
+ 8 pqixbY         Perceval     Dallosso    Male      36 Vietnam              
+ 9 QNAs2R         Aleda        Pigram      Female    35 Palestinian Territory
+10 3jmudz         Burlie       Schustl     Male      13 Thailand             
+# ℹ 98,609 more rows
+# ℹ 10 more variables: `Airport Name` &lt;chr&gt;, `Airport Country Code` &lt;chr&gt;,
+#   `Country Name` &lt;chr&gt;, `Airport Continent` &lt;chr&gt;, Continents &lt;chr&gt;,
+#   `Departure Date` &lt;chr&gt;, `Arrival Airport` &lt;chr&gt;, `Pilot Name` &lt;chr&gt;,
+#   `Flight Status` &lt;chr&gt;, New_Age &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data_new)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Passenger ID"         "First Name"           "Last Name"           
+ [4] "Gender"               "Age"                  "Nationality"         
+ [7] "Airport Name"         "Airport Country Code" "Country Name"        
+[10] "Airport Continent"    "Continents"           "Departure Date"      
+[13] "Arrival Airport"      "Pilot Name"           "Flight Status"       
+[16] "New_Age"             </code></pre>
+</div>
+</div>
+<ul>
+<li>The same mutate function also allows you to update an existing variables.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>data_new <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Departure Date</span><span class="st">`</span> <span class="ot">=</span><span class="fu">as.Date</span>(<span class="st">`</span><span class="at">Departure Date</span><span class="st">`</span>, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_new)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Passenger ID        First Name         Last Name            Gender         
+ Length:98619       Length:98619       Length:98619       Length:98619      
+ Class :character   Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+                                                                            
+                                                                            
+                                                                            
+      Age       Nationality        Airport Name       Airport Country Code
+ Min.   : 1.0   Length:98619       Length:98619       Length:98619        
+ 1st Qu.:23.0   Class :character   Class :character   Class :character    
+ Median :46.0   Mode  :character   Mode  :character   Mode  :character    
+ Mean   :45.5                                                             
+ 3rd Qu.:68.0                                                             
+ Max.   :90.0                                                             
+ Country Name       Airport Continent   Continents        Departure Date      
+ Length:98619       Length:98619       Length:98619       Min.   :2022-01-01  
+ Class :character   Class :character   Class :character   1st Qu.:2022-04-01  
+ Mode  :character   Mode  :character   Mode  :character   Median :2022-07-01  
+                                                          Mean   :2022-07-01  
+                                                          3rd Qu.:2022-09-30  
+                                                          Max.   :2022-12-30  
+ Arrival Airport     Pilot Name        Flight Status     
+ Length:98619       Length:98619       Length:98619      
+ Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character  
+                                                         
+                                                         
+                                                         </code></pre>
+</div>
+</div>
+</section>
+<section id="summarisebritish-or-summarize-us-calculate-summary-statistics" class="level4" data-number="6.2.1.4">
+<h4 data-number="6.2.1.4" class="anchored" data-anchor-id="summarisebritish-or-summarize-us-calculate-summary-statistics"><span class="header-section-number">6.2.1.4</span> <code>summarise</code>(British) or <code>summarize</code> (US) : Calculate summary statistics</h4>
+<ul>
+<li>this function collapses many values down to a single summary.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>data_new <span class="sc">|&gt;</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Departure_Date_start =</span><span class="fu">min</span>(<span class="st">`</span><span class="at">Departure Date</span><span class="st">`</span>),</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Departure_Date_end =</span><span class="fu">max</span>(<span class="st">`</span><span class="at">Departure Date</span><span class="st">`</span>),</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age_median=</span><span class="fu">median</span>(Age),</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age_mean=</span><span class="fu">mean</span>(Age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  Departure_Date_start Departure_Date_end Age_median Age_mean
+  &lt;date&gt;               &lt;date&gt;                  &lt;dbl&gt;    &lt;dbl&gt;
+1 2022-01-01           2022-12-30                 46     45.5</code></pre>
+</div>
+</div>
+<p>Since it contains missing values, they should be removed before calculating the summary statistics</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>data_new <span class="sc">|&gt;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Departure_Date_start =</span><span class="fu">min</span>(<span class="st">`</span><span class="at">Departure Date</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Departure_Date_end =</span><span class="fu">max</span>(<span class="st">`</span><span class="at">Departure Date</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age_median=</span><span class="fu">median</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age_mean=</span><span class="fu">mean</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  Departure_Date_start Departure_Date_end Age_median Age_mean
+  &lt;date&gt;               &lt;date&gt;                  &lt;dbl&gt;    &lt;dbl&gt;
+1 2022-01-01           2022-12-30                 46     45.5</code></pre>
+</div>
+</div>
+</section>
+<section id="arrange-sort-rows-by-a-column" class="level4" data-number="6.2.1.5">
+<h4 data-number="6.2.1.5" class="anchored" data-anchor-id="arrange-sort-rows-by-a-column"><span class="header-section-number">6.2.1.5</span> <code>arrange()</code> – Sort rows by a column</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(data, <span class="fu">desc</span>(Age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 98,619 × 15
+   `Passenger ID` `First Name` `Last Name` Gender   Age Nationality   
+   &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;         
+ 1 to75jW         Pamella      Eaden       Female    90 Indonesia     
+ 2 Zlsjqw         Sydney       MacGhee     Male      90 Guatemala     
+ 3 aogYWd         Vernen       Ivakhnov    Male      90 China         
+ 4 X0basI         Mariann      Moogan      Female    90 Philippines   
+ 5 N7DLfQ         Jermaine     Escott      Male      90 Portugal      
+ 6 fZhPqR         Valdemar     Whate       Male      90 Brazil        
+ 7 usnzLP         Raul         Mantha      Male      90 Argentina     
+ 8 L49UDI         Neall        Zamudio     Male      90 Czech Republic
+ 9 L1ZBXS         Anthea       Blodget     Female    90 Indonesia     
+10 CjAY9o         Valene       Megarry     Female    90 Indonesia     
+# ℹ 98,609 more rows
+# ℹ 9 more variables: `Airport Name` &lt;chr&gt;, `Airport Country Code` &lt;chr&gt;,
+#   `Country Name` &lt;chr&gt;, `Airport Continent` &lt;chr&gt;, Continents &lt;chr&gt;,
+#   `Departure Date` &lt;chr&gt;, `Arrival Airport` &lt;chr&gt;, `Pilot Name` &lt;chr&gt;,
+#   `Flight Status` &lt;chr&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="group_by-group-data-for-grouped-operations" class="level4" data-number="6.2.1.6">
+<h4 data-number="6.2.1.6" class="anchored" data-anchor-id="group_by-group-data-for-grouped-operations"><span class="header-section-number">6.2.1.6</span> <code>group_by()</code> – Group data for grouped operations</h4>
+<ul>
+<li>This fucntion takes an existing tibble and converts it into a grouped tibble where operations are performed “by group”. ungroup() removes grouping.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>customers_grouped <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> <span class="fu">group_by</span>(Continents )</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>customers_grouped</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 98,619 × 15
+# Groups:   Continents [6]
+   `Passenger ID` `First Name` `Last Name` Gender   Age Nationality          
+   &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;                
+ 1 ABVWIg         Edithe       Leggis      Female    62 Japan                
+ 2 jkXXAX         Elwood       Catt        Male      62 Nicaragua            
+ 3 CdUz2g         Darby        Felgate     Male      67 Russia               
+ 4 BRS38V         Dominica     Pyle        Female    71 China                
+ 5 9kvTLo         Bay          Pencost     Male      21 China                
+ 6 nMJKVh         Lora         Durbann     Female    55 Brazil               
+ 7 8IPFPE         Rand         Bram        Male      73 Ivory Coast          
+ 8 pqixbY         Perceval     Dallosso    Male      36 Vietnam              
+ 9 QNAs2R         Aleda        Pigram      Female    35 Palestinian Territory
+10 3jmudz         Burlie       Schustl     Male      13 Thailand             
+# ℹ 98,609 more rows
+# ℹ 9 more variables: `Airport Name` &lt;chr&gt;, `Airport Country Code` &lt;chr&gt;,
+#   `Country Name` &lt;chr&gt;, `Airport Continent` &lt;chr&gt;, Continents &lt;chr&gt;,
+#   `Departure Date` &lt;chr&gt;, `Arrival Airport` &lt;chr&gt;, `Pilot Name` &lt;chr&gt;,
+#   `Flight Status` &lt;chr&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">age_mean=</span><span class="fu">mean</span>(Age, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  age_mean
+     &lt;dbl&gt;
+1     45.5</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>customers_grouped <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">age_mean=</span><span class="fu">mean</span>(Age, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  Continents    age_mean
+  &lt;chr&gt;            &lt;dbl&gt;
+1 Africa            45.6
+2 Asia              45.7
+3 Europe            45.2
+4 North America     45.6
+5 Oceania           45.4
+6 South America     45.4</code></pre>
+</div>
+</div>
+</section>
+<section id="rename-change-column-names" class="level4" data-number="6.2.1.7">
+<h4 data-number="6.2.1.7" class="anchored" data-anchor-id="rename-change-column-names"><span class="header-section-number">6.2.1.7</span> <code>rename()</code> – Change column names</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">rename</span>(data,  <span class="at">Passenger_ID =</span> <span class="st">`</span><span class="at">Passenger ID</span><span class="st">`</span>,</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">Airport_code =</span> <span class="st">`</span><span class="at">Airport Country Code</span><span class="st">`</span> ) <span class="co"># new_name = old_name</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 98,619 × 15
+   Passenger_ID `First Name` `Last Name` Gender   Age Nationality `Airport Name`
+   &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;         
+ 1 ABVWIg       Edithe       Leggis      Female    62 Japan       Coldfoot Airp…
+ 2 jkXXAX       Elwood       Catt        Male      62 Nicaragua   Kugluktuk Air…
+ 3 CdUz2g       Darby        Felgate     Male      67 Russia      Grenoble-Isèr…
+ 4 BRS38V       Dominica     Pyle        Female    71 China       Ottawa / Gati…
+ 5 9kvTLo       Bay          Pencost     Male      21 China       Gillespie Fie…
+ 6 nMJKVh       Lora         Durbann     Female    55 Brazil      Coronel Horác…
+ 7 8IPFPE       Rand         Bram        Male      73 Ivory Coast Duxford Aerod…
+ 8 pqixbY       Perceval     Dallosso    Male      36 Vietnam     Maestro Wilso…
+ 9 QNAs2R       Aleda        Pigram      Female    35 Palestinia… Venice Marco …
+10 3jmudz       Burlie       Schustl     Male      13 Thailand    Vermilion Air…
+# ℹ 98,609 more rows
+# ℹ 8 more variables: Airport_code &lt;chr&gt;, `Country Name` &lt;chr&gt;,
+#   `Airport Continent` &lt;chr&gt;, Continents &lt;chr&gt;, `Departure Date` &lt;chr&gt;,
+#   `Arrival Airport` &lt;chr&gt;, `Pilot Name` &lt;chr&gt;, `Flight Status` &lt;chr&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="combine-multiple-operations" class="level4" data-number="6.2.1.8">
+<h4 data-number="6.2.1.8" class="anchored" data-anchor-id="combine-multiple-operations"><span class="header-section-number">6.2.1.8</span> Combine multiple operations</h4>
+<p>You can even combine multiple verbs at once to obtain the dataset in the desired structure. This is where the pipe operator becomes very handy.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Nationality <span class="sc">==</span> <span class="st">"Sri Lanka"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 15
+  Passenger_ID `First Name` `Last Name` Gender   Age Nationality `Airport Name` 
+  &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;          
+1 fhD57Z       Jordan       Fierman     Female    11 Sri Lanka   Yoshkar-Ola Ai…
+2 5joYmi       Valdemar     Marcone     Male       7 Sri Lanka   Mungeranie Air…
+# ℹ 8 more variables: Airport_code &lt;chr&gt;, `Country Name` &lt;chr&gt;,
+#   `Airport Continent` &lt;chr&gt;, Continents &lt;chr&gt;, `Departure Date` &lt;chr&gt;,
+#   `Arrival Airport` &lt;chr&gt;, `Pilot Name` &lt;chr&gt;, `Flight Status` &lt;chr&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Nationality <span class="sc">==</span> <span class="st">"Sri Lanka"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Age_mean=</span><span class="fu">mean</span>(Age, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  Age_mean
+     &lt;dbl&gt;
+1     43.9</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>data_new <span class="sc">|&gt;</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Nationality <span class="sc">==</span> <span class="st">"Sri Lanka"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">|&gt;</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Age <span class="sc">&gt;</span> <span class="dv">45</span>) <span class="sc">|&gt;</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="st">`</span><span class="at">Departure Date</span><span class="st">`</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 65 × 15
+# Groups:   Gender [2]
+   `Passenger ID` `First Name` `Last Name` Gender   Age Nationality
+   &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;      
+ 1 Garp7s         Elwood       Seczyk      Male      61 Sri Lanka  
+ 2 bmMaNv         Mellie       Werrett     Female    76 Sri Lanka  
+ 3 W9kjm9         Lewes        Gollard     Male      75 Sri Lanka  
+ 4 C5sSaq         Jose         Duffit      Male      87 Sri Lanka  
+ 5 YpH6kH         Xenos        McEntagart  Male      71 Sri Lanka  
+ 6 lXSEsW         Ad           Fernihough  Male      48 Sri Lanka  
+ 7 5OPpWn         Marieann     Strelitzki  Female    77 Sri Lanka  
+ 8 oCZkZ2         Aaron        MacCaffery  Male      83 Sri Lanka  
+ 9 L7ut1f         Dell         Shreenan    Male      62 Sri Lanka  
+10 soCbR1         Matthieu     Matches     Male      47 Sri Lanka  
+# ℹ 55 more rows
+# ℹ 9 more variables: `Airport Name` &lt;chr&gt;, `Airport Country Code` &lt;chr&gt;,
+#   `Country Name` &lt;chr&gt;, `Airport Continent` &lt;chr&gt;, Continents &lt;chr&gt;,
+#   `Departure Date` &lt;date&gt;, `Arrival Airport` &lt;chr&gt;, `Pilot Name` &lt;chr&gt;,
+#   `Flight Status` &lt;chr&gt;</code></pre>
+</div>
+</div>
 
 
+</section>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

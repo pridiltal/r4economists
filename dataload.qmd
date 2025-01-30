@@ -24,7 +24,7 @@ When you work with data, you save your raw data in a separate file, like a CSV. 
 
 ### Read data files into a tibble
 
-[Download the dataset](data/touristsl.csv)
+[Download the dataset: touristsl.csv](data/touristsl.csv)
 
 ```{r eval = FALSE}
 data1 <- read_csv("touristsl.csv")
