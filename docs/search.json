@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Getting Started with R for Economists",
     "section": "",
-    "text": "Preface\nR is a free and powerful software environment for statistical computing and data visualization. It is widely used in academia and industry for data analysis and research. As one of the top programming languages for data science, R provides a variety of tools for statistical modeling, computing, and visualization.\nSince empirical research is essential in economics, programming skills are crucial for conducting real-world data analysis. This textbook will introduce you to R and help you develop fundamental data science skills.\n\nAbout This Book\nThis textbook is designed for beginners, providing a strong foundation in R for economic research. It focuses on the tidyverse ecosystem, a collection of R packages that provide a simple yet powerful approach to data analysis. You will learn how to use tidy tools to manage and analyze data efficiently, covering the entire lifecycle of a data science project.",
+    "text": "Preface\nR is a free and powerful software environment for statistical computing and data visualization. It is widely used in academia and industry for data analysis and research. As one of the top programming languages for data science, R provides a variety of tools for statistical modeling, computing, and visualization.\nSince empirical research is essential in economics, programming skills are crucial for conducting real-world data analysis. This textbook will introduce you to R and help you develop fundamental data science skills.\n\nAbout This Book\nThis textbook is designed for beginners, providing a strong foundation in R for economic research. It focuses on the tidyverse ecosystem, a collection of R packages that provide a simple yet powerful approach to data analysis. You will learn how to use tidy tools to manage and analyze data efficiently, covering the entire lifecycle of a data science project.\n\n\nWho Can Benefit from This Book\nI wrote this textbook for two groups of readers. The first group is the participants of the workshop Getting Started with R for Economists: A Hands-On Workshop, which was organized for the 52nd Meeting of the Sri Lanka Forum of University Economists. This book serves as a companion to that workshop. Since the workshop lasts only one hour, the goal is to introduce participants to the tidyverse workflow and give them a strong foundation so they can continue learning on their own.\nThe second group is any economist who is new to programming and wants to start analyzing data using R. This book is a good starting point for your journey. However, to master each topic fully, I recommend reading more advanced textbooks on R, covering the different areas discussed here.\n\n\nShare Your Thoughts!\nThis book is still a work in progress, and some chapters (marked WIP) are still in the oven—they’ll be ready soon! If you have any suggestions to improve the content, feel free to open a GitHub issue here. I’d love to hear from you! 🚀",
     "crumbs": [
       "Preface"
     ]
@@ -227,6 +227,46 @@
     "text": "4.4 Anatomy of a Quarto document\nNow that you know how to render a Quarto document, let’s get familiar with the anatomy of a Quarto document. The file contains three types of content: a YAML header, code chunks, and markdown text.\nIn addition to that, we can view the same .qmd document in two modes of the RStudio editor: visual (on the left) and source (on the right). Open the source window so that you can easily identify the syntax..\n\n4.4.1 YAML header\n\nIn Quarto, YAML (which stands for YAML Ain’t Markup Language) is used for setting up metadata and configurations for your document.\nIt is placed at the top of the Quarto file within three dashes (—), and it allows you to specify document options such as the title, author, output format (HTML, PDF, Word), date, and more.\nIn YAML, the basic format is key: value, where you assign a value to a key.\n\n---\ntitle: \"Getting Started with Quarto\"\nsubtitle: \"Report 1\"\nauthor: \"Priyanga Talagala\"\ndate: \"2025-01-31\"\noutput: html_document\n---\n\n\n4.4.2 Code Chunks\n\nIn Quarto, code chunks are sections of the document where you can write and run code. You can think of this part as a mini console window within the Quarto document.\nA code chunk in Quarto is enclosed between three backticks (```) to separate it from the rest of the text.\nThe code inside these chunks is executed when you render the document, and the output (such as tables, plots, or results) is displayed directly in the final document.\nThese chunks can contain code written in different programming languages, such as R, Python, or Julia. In the following example, {r} indicates that we are going to run R code inside this code chunk.\nIf you want to run Python code, you just need to replace {r} with {python} in the code chunk.\n\n\n\n\n\n\nCode Chunks. LHS : Source file, RHS: Resulted output\n\n\n\n\n\n\n4.4.3 Markdown text\n\nMarkdown text includes formatted text, such as section headers, paragraphs, embedded images, and more. Quarto uses Markdown syntax for writing text, which is clear when you switch to the Source tab.\nTo define section headings, you use the # symbol. The number of # symbols determines the level of the heading: one # for an H1 heading, two ## for an H2 heading, three ### for an H3 heading, and so on.\nIn R Markdown syntax, you can format text as follows:\n\nTo make text bold, use **bold**.\nTo make text italic, use *italic*.\n\n\nThis is **bold** text and this is *italic* text.\nThis is bold text and this is italic text.",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Reproducible Reporting with Quarto</span>"
+    ]
+  },
+  {
+    "objectID": "dataload.html",
+    "href": "dataload.html",
+    "title": "5  Data Import and Export",
+    "section": "",
+    "text": "WIP 🚧⏳",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data Import and Export</span>"
+    ]
+  },
+  {
+    "objectID": "datawrangling.html",
+    "href": "datawrangling.html",
+    "title": "6  Data Wrangling",
+    "section": "",
+    "text": "WIP 🚧⏳",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Data Wrangling</span>"
+    ]
+  },
+  {
+    "objectID": "dataviz.html",
+    "href": "dataviz.html",
+    "title": "7  Data Visualization",
+    "section": "",
+    "text": "WIP 🚧⏳",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "statmodelling.html",
+    "href": "statmodelling.html",
+    "title": "8  Introduction to Statistical Modelling",
+    "section": "",
+    "text": "WIP 🚧⏳",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Introduction to Statistical Modelling</span>"
     ]
   },
   {
