@@ -5,7 +5,7 @@ project:
 
 book:
   title: "Getting Started with R for Economists"
-  author: "Priyanga Dilini Talagala"
+  #author: "Priyanga Dilini Talagala"
   date: "1/6/2025"
   chapters:
     - index.qmd
